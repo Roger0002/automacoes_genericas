@@ -1,0 +1,18 @@
+---
+
+- name: Upgrade via leapp
+  hosts: "{{ servidor }}"
+  strategy: free
+  force_handlers: true
+  become: true
+  vars:
+    satellite_organization: "{{ organizacao_satellite }}"
+    satellite_activation_key_leapp: "{{ ak_do_leapp }}"
+    satellite_activation_key_post_leapp: "{{ ak_apos_leapp }}"
+    update_grub_to_grub_2: true
+    selinux_mode: permissive
+  tasks:
+    - name: Faz a atualização da máquina {{ servidor }}
+      ansible.builtin.import_role:
+        name: infra.leapp.upgrade
+...
