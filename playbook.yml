@@ -3,6 +3,7 @@
 - name: Upgrade via leapp
   hosts: "{{ servidor }}"
   strategy: free
+  gather_facts: true
   force_handlers: true
   become: true
   vars:
