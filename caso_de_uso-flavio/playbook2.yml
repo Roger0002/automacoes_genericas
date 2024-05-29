@@ -1,0 +1,8 @@
+---
+- name: Play reinicializador das máquinas
+  hosts: "{{ servidor }}"
+  gather_facts: false
+  tasks:
+    - name: Tarefa que reinicia a(s) máquina(s)
+      ansible.builtin.reboot:
+        msg: "Reiniciando a máquina {{ inventory_hostname }}..."
