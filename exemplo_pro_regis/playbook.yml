@@ -9,7 +9,7 @@
   tasks:
     - name: Compacta o conteúdo de um diretório
       ansible.builtin.archive:
-        path: /root/diretorio_caotic*
+        path: /root/diretorio_caotiic*
         dest: "{{ arq_compressed }}"
         format: gz
         force_archive: true
