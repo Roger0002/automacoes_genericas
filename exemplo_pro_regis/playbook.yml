@@ -9,7 +9,7 @@
   tasks:
     - name: Cria
       ansible.builtin.shell: "mkdir -p /runner/project/exemplo_pro_regis/diretorio_caotico/asdf; touch /runner/project/exemplo_pro_regis/diretorio_caotico/asdf/aaaa; pwd"
-      register: saida_module_shell
+      register: saida_modulo_shell
 
     - name: Compacta o conteúdo de um diretório
       ansible.builtin.archive:
