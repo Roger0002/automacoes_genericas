@@ -8,7 +8,7 @@
     arq_compressed: compressed.tar.gz
   tasks:
     - name: Cria
-      ansible.builtin.shell: "mkdir -p /root/diretorio_caotico/asdf; touch /root/diretorio_caotico/asdf/aaaa"
+      ansible.builtin.shell: "mkdir -p /root/diretorio_caotico/asdf; touch /root/diretorio_caotico/asdf/aaaa; pwd"
 
     - name: Compacta o conteúdo de um diretório
       ansible.builtin.archive:
