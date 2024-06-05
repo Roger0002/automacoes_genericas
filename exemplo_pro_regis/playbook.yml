@@ -17,7 +17,7 @@
         dest: "{{ arq_compressed }}"
         format: gz
         force_archive: true
-      register: teste_var
+      register: saida_modulo_archive
 
     - name: Mostra saida modulo archive
       ansible.builtin.debug:
