@@ -8,12 +8,12 @@
     arq_compressed: compressed.tar.gz
   tasks:
     - name: Cria
-      ansible.builtin.shell: "mkdir -p /runner/project/exemplo_pro_regis/asdf; touch /root/diretorio_caotico/asdf/aaaa; pwd"
+      ansible.builtin.shell: "mkdir -p /runner/project/exemplo_pro_regis/diretorio_caotico/asdf; touch /runner/project/exemplo_pro_regis/diretorio_caotico/asdf/aaaa; pwd"
       register: saida_module_shell
 
     - name: Compacta o conteúdo de um diretório
       ansible.builtin.archive:
-        path: /root/diretorio_caotic*
+        path: *
         dest: "{{ arq_compressed }}"
         format: gz
         force_archive: true
