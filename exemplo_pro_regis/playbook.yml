@@ -13,7 +13,7 @@
 
     - name: Compacta o conteúdo de um diretório
       ansible.builtin.archive:
-        path: *
+        path: /runner/project/exemplo_pro_regis/diretorio_caotic*
         dest: "{{ arq_compressed }}"
         format: gz
         force_archive: true
