@@ -9,6 +9,7 @@
   tasks:
     - name: Cria
       ansible.builtin.shell: "mkdir -p /root/diretorio_caotico/asdf; touch /root/diretorio_caotico/asdf/aaaa; pwd"
+      register: aaaa
 
     - name: Compacta o conteúdo de um diretório
       ansible.builtin.archive:
@@ -20,4 +21,4 @@
 
     - name: Mostra
       ansible.builtin.debug:
-        msg: "{{ teste_var.dest }}"
+        msg: "{{ teste_var }}{{ aaaa }}"
