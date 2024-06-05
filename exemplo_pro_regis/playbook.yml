@@ -1,0 +1,20 @@
+---
+
+- name: Teste
+  hosts: clienterhel8.s2linux.local
+  become: true
+  gather_facts: false
+  vars:
+    arq_compressed: compressed.tar.gz
+  tasks:
+    - name: Compacta o conteúdo de um diretório
+      ansible.builtin.archive:
+        path: /root/diretorio_caotico
+        dest: "{{ arq_compressed }}"
+        format: gz
+        force_archive: true
+      register: teste_var
+
+    - name: Mostra
+      ansible.builtin.debug:
+        var: teste_var
