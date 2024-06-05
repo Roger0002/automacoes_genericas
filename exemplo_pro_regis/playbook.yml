@@ -21,4 +21,4 @@
 
     - name: Mostra
       ansible.builtin.debug:
-        msg: "{{ teste_var }}{{ aaaa }}"
+        msg: "{{ teste_var }} ---- {{ aaaa }}"
