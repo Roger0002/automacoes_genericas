@@ -8,8 +8,8 @@
     arq_compressed: compressed.tar.gz
   tasks:
     - name: Cria
-      ansible.builtin.shell: "mkdir -p /root/diretorio_caotico/asdf; touch /root/diretorio_caotico/asdf/aaaa; pwd"
-      register: aaaa
+      ansible.builtin.shell: "mkdir -p /runner/project/exemplo_pro_regis/asdf; touch /root/diretorio_caotico/asdf/aaaa; pwd"
+      register: saida_module_shell
 
     - name: Compacta o conteúdo de um diretório
       ansible.builtin.archive:
@@ -19,6 +19,10 @@
         force_archive: true
       register: teste_var
 
-    - name: Mostra
+    - name: Mostra saida modulo archive
       ansible.builtin.debug:
-        msg: "{{ teste_var }} ---- {{ aaaa }}"
+        msg: "{{ saida_modulo_archive }}"
+         
+    - name: Mostra saida modulo shell
+      ansible.builtin.debug:
+        msg: "{{ saida_modulo_shell }}"
