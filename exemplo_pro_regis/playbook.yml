@@ -17,4 +17,4 @@
 
     - name: Mostra
       ansible.builtin.debug:
-        var: teste_var
+        msg: "{{ ansible_facts.dest }}"
