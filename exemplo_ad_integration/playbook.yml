@@ -1,0 +1,13 @@
+---
+- name: Play responsável pelo join de máquinas RHEL 7, 8 e 9 no Active Directory
+  hosts: clienterhel[8-9].s2linux.local
+  become: true
+  gather_facts: true
+  vars_files:
+    - info.yml
+
+  tasks:
+    - name: Tarefa responsável por inserir a máquina no domínio do AD
+      ansible.builtin.include_role:
+        name: rhel-system-roles.ad_integration
+...
