@@ -5,8 +5,39 @@
   gather_facts: true
   vars_files:
     - info.yml
-
   tasks:
+    - name: Define a lista com os servidores DNS configurados na máquina
+      ansible.builtin.set_fact:
+        servidores_dns: "{{ ansible_facts.dns.nameservers }}"
+
+    - name: Gera a lista de conexões do NetworkManager
+      ansible.builtin.shell: nmcli --fields NAME connection show | grep -Ev "^NAME |^lo "
+      register: lista_conexoes_nm
+
+    - name: Define a lista com as conexões do NetworkManager na máquina
+      ansible.builtin.set_fact:
+        conexoes_nm: "{{ lista_conexoes_nm.stdout_lines | replace(' ', '') }}"
+
+    - name: Cria a lista que receberá as conexões com DNS configurado
+      ansible.builtin.set_fact:
+        conexoes_nm_com_dns: []
+
+    - name: Tarefa que definirá as conexões do NM com DNS configurado
+      ansible.builtin.include_tasks: my_tasks.yml
+      loop: "{{ conexoes_nm }}"
+
+    - name: Configura o(s) servidor(es) DNS correto(s)
+      block:
+        - name: Configura os DNS na base do NetworkManager
+          community.general.nmcli:
+            conn_name: "{{ conexoes_nm_com_dns[0] }}"
+            dns4: "{{ lista_dns }}"
+            state: present
+
+        - name: Aplica as configurações na conexão {{ conexoes_nm_com_dns[0] }}
+          ansible.builtin.shell: nmcli connection up {{ conexoes_nm_com_dns[0] }}
+      when: conexoes_nm_com_dns | length == 1
+
     - name: Tarefa responsável por inserir a máquina no domínio do AD
       ansible.builtin.include_role:
         name: rhel-system-roles.ad_integration
