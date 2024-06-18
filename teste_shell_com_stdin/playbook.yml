@@ -8,6 +8,7 @@
         cmd: /root/script.sh
         stdin: "{{ vari_minha | default('1') }}"
       register: saida
+      failed_when: false
 
     - name: Exibe a saída anterior
       ansible.builtin.debug:
