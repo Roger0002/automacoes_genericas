@@ -4,6 +4,6 @@
   gather_facts: false
   tasks:
     - name: Executa o script via shell
-      ansible.builtin.shell: /root/script.sh
-      args:
-        stdin: "1"
+      ansible.builtin.shell:
+        cmd: /root/script.sh
+        stdin: 1
