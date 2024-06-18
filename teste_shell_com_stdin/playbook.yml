@@ -1,0 +1,9 @@
+---
+- name: Play que testa o parâmetro stdin do módulo shell
+  hosts: clienterhel8.s2linux.local
+  gather_facts: false
+  tasks:
+    - name: Executa o script via shell
+      ansible.builtin.shell: /root/script.sh
+      args:
+        stdin: "1"
