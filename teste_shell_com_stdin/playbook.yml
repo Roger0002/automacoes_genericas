@@ -6,7 +6,7 @@
     - name: Executa o script via shell
       ansible.builtin.shell:
         cmd: /root/script.sh
-        stdin: "1"
+        stdin: "{{ vari_minha | default('1') }}"
       register: saida
 
     - name: Exibe a saída anterior
