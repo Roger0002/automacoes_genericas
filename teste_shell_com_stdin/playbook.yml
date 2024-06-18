@@ -6,4 +6,9 @@
     - name: Executa o script via shell
       ansible.builtin.shell:
         cmd: /root/script.sh
-        stdin: "1\n"
+        stdin: "1"
+      register: saida
+
+    - name: Exibe a saída anterior
+      ansible.builtin.debug:
+        var: saida
