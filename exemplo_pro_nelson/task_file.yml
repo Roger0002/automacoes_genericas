@@ -1,0 +1,21 @@
+---
+# Guardado para fins documentacionais, não está em uso
+- name: Gera a lista que guardará a relação de file systems da máquina
+  ansible.builtin.set_fact:
+    lista_fs: []
+  delegate_to: "{{ item }}"
+
+- name: Constroi a lista de file systems
+  ansible.builtin.set_fact: 
+    lista_fs: "{{ lista_fs + [item_a.mount] }}"
+  loop: "{{ ansible_facts.mounts }}"
+  loop_control:
+    loop_var: item_a
+  delegate_to: "{{ item }}"
+
+- name: Incrementa a variável com o número de nós com o file system montado, caso ele esteja
+  ansible.builtin.set_fact:
+    n_nos_fs_online: "{{ n_nos_fs_online + 1 }}"
+  delegate_to: "{{ item }}"
+  when: '"/var/fs_application" in lista_fs'
+...
