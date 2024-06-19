@@ -3,49 +3,19 @@
   hosts: clienterhel[8-9].s2linux.local
   become: true
   gather_facts: true
+  vars:
+    ansible_password: 12345678
   vars_files:
     - info.yml
 
   tasks:
-    - name: Gera a lista de conexões do NetworkManager
-      block:
-        - name: Executa o nmcli na máquina
-          ansible.builtin.shell: nmcli --fields NAME connection show | grep -Ev "^NAME |^lo "
-          register: lista_conexoes_nm
-
-        - name: Gera a lista de conexões do NetworkManager com base na saída da task anterior
-          ansible.builtin.set_fact:
-            conexoes_nm: "{{ lista_conexoes_nm.stdout_lines | replace(' ', '') }}"
-
-      rescue:
-        - name: Exibe uma mensagem caso a geração da lista de conexões tenha algum problema
-          ansible.builtin.debug:
-            msg: "Problema na geração da lista de conexões"
-
-    - name: Cria a lista que receberá as conexões com DNS configurado
-      ansible.builtin.set_fact:
-        conexoes_nm_com_dns: []
-
-    - name: Tarefa que definirá as conexões do NM com DNS configurado
-      ansible.builtin.include_tasks: lista_conec_con_dns.yml
-      loop: "{{ conexoes_nm }}"
-
-    - name: Configura o(s) servidor(es) DNS correto(s) na conexão {{ conexoes_nm_com_dns[0] }}
-      block:
-        - name: Configura os DNS na base do NetworkManager
-          community.general.nmcli:
-            conn_name: "{{ conexoes_nm_com_dns[0] }}"
-            dns4: "{{ lista_dns }}"
-            state: present
-
-        - name: Aplica as configurações na conexão {{ conexoes_nm_com_dns[0] }}
-          ansible.builtin.shell: nmcli connection up {{ conexoes_nm_com_dns[0] }}
-
-      rescue:
-        - name: Exibe uma mensagem caso a configuração do servidor DNS resulte em erro
-          ansible.builtin.debug:
-            msg: "Problema na configuração dos servidores DNS"
-      when: conexoes_nm_com_dns | length == 1
+    - name: Tarefa responsável por setar o DNS correto
+      vars:
+        lista_dns:
+          - 172.16.67.34
+          - 8.8.8.8
+      ansible.builtin.include_role:
+        name: setar_dns_nm
 
     - name: Tarefa responsável por inserir a máquina no domínio do AD
       ansible.builtin.include_role:
