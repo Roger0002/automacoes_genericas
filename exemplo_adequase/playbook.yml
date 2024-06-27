@@ -8,12 +8,10 @@
       ansible.builtin.shell:
         cmd: /usr/sbin/subscription-manager list --available
       register: saida
-      when: false
 
     - name: Cria a variável result_var com a informação da saída anterior tratada
       ansible.builtin.set_fact:
         result_var: "{{ (saida.stdout_lines | select('search', 'SKU:\ *ES011'))[0] }}"
-      when: false
 
     # Dica 2
     - name: rpm -qa
@@ -35,7 +33,6 @@
       ansible.builtin.reboot:
         msg: "Reboot devido a atualizacoes de pacotes (ciclo mensal)"
         pre_reboot_delay: 60
-      when: false
 
     # Dica 4
     - name: Captura o conteúdo do arquivo /tmp/patch_linux.txt em base64
