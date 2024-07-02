@@ -1,0 +1,12 @@
+---
+
+- name: Play que lida com o Facts
+  hosts: clienterhel8.s2linux.local
+  gather_facts: false
+  tasks:
+    - name: Captura os facts
+      ansible.builtin.service_facts:
+
+    - name: Exibe os facts
+      ansible.builtin.debug:
+        var: ansible_facts.services['sshd.service']
