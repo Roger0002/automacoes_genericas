@@ -8,6 +8,7 @@
   become: true
   tasks:
     - name: Teste
+      no_log: true
       ansible.builtin.debug:
         msg: "Usuário: {{ lookup('env', 'VMWARE_USER') }}; Senha: {{ lookup('env', 'VMWARE_PASSWORD') }}"
 ...
