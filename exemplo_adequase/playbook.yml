@@ -3,6 +3,9 @@
   hosts: clienterhel8.s2linux.local
   gather_facts: true
   tasks:
+    - name: Teste
+      ansible.builtin.debug:
+        var: ansible_playbook_python
     # Dica 1
     - name: Executa o Subscription Manager via módulo shell
       ansible.builtin.shell:
