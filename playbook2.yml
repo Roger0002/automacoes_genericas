@@ -9,5 +9,5 @@
   tasks:
     - name: Teste
       ansible.builtin.debug:
-        msg: "Usuário: {{ lookup('env', 'VMWARE_USER') }}; Senha: {{ lookup('env', 'VMWARE_USER') }}"
+        msg: "Usuário: {{ lookup('env', 'VMWARE_USER') }}; Senha: {{ lookup('env', 'VMWARE_PASSWORD') }}"
 ...
