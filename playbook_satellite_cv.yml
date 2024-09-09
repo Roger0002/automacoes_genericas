@@ -1,0 +1,38 @@
+- name: Play demonstrador de publicação de CV + Promoção para LCE
+  hosts: localhost
+  gather_facts: false
+  tasks:
+
+    - name: Publica e promove para homologacao
+      redhat.satellite.content_view_version:
+        username: "admin"
+        server_url: "https://satellite.s2linux.local"
+        password: 'RedHat123!'
+        content_view: CV-RHEL8
+        organization: S2 Linux
+        validate_certs: false
+        lifecycle_environments: homologacao
+          
+    - name: Aguardando
+      ansible.builtin.wait_for:
+        timeout: 20
+          
+    - name: Pega as informações sobre o CV CV-RHEL8
+      redhat.satellite.content_view_info:
+        username: admin
+        password: 'RedHat123!'
+        server_url: https://satellite.s2linux.local
+        name: "CV-RHEL8"
+        validate_certs: false
+      register: cv_info
+    
+    - name: Só promove a última versão para a produção
+      redhat.satellite.content_view_version:
+        username: "admin"
+        server_url: "https://satellite.s2linux.local"
+        password: 'RedHat123!'
+        content_view: CV-RHEL8
+        organization: S2 Linux
+        version: "{{ cv_info.content_view.latest_version }}"
+        validate_certs: false
+        lifecycle_environments: producao

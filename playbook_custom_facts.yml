@@ -1,0 +1,5 @@
+- hosts: clienterhel7.s2linux.local
+  gather_facts: true
+  tasks:
+    - ansible.builtin.debug:
+        var: ansible_facts
