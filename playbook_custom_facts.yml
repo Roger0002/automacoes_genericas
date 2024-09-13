@@ -5,5 +5,5 @@
   tasks:
     - name: task coletora de facts
       ansible.builtin.setup:
-        fact_path: /root/facts_personalizados.fact
+        fact_path: /etc/facts_personalizados.fact
 ...
