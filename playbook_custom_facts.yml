@@ -1,9 +1,6 @@
 ---
 - name: Play coletor de facts
   hosts: clienterhel[7-9].s2linux.local
-  gather_facts: false
-  tasks:
-    - name: task coletora de facts
-      ansible.builtin.setup:
-        fact_path: /etc/facts_personalizados.fact
+  gather_facts: true
+  tasks: []
 ...
