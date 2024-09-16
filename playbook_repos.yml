@@ -4,7 +4,7 @@
     - shell: yum -q repolist
       register: yum_repolist
 
-    - shell: subscription-manager repos --list-enabled
+    - shell: subscription-manager repos --list-enabled | grep -E "^Repo ID"
       register: subsc_man
 
     - debug:
