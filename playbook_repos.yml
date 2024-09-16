@@ -6,7 +6,6 @@
 
     - shell: subscription-manager repos --list-enabled | grep -E "^Repo ID"
       register: subsc_man
-      when: false
 
-    - debug:
-        var: yum_repolist.stdout_lines | length
+    - shell: zabbix_sender
+      when: yum_repolist.stdout_lines | length > subsc_man.stdout_lines | length
