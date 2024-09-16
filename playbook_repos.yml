@@ -10,6 +10,6 @@
     - debug:
        msg: |
          Saída do subscription-manager
-         {{ subsc_man }}
+         {{ subsc_man | to_nice_json }}
          Saída do yum repolist
-         {{ yum_repolist }}
+         {{ yum_repolist | to_noce_json }}
