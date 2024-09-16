@@ -1,11 +1,12 @@
 - hosts: clienterhel8.s2linux.local
   gather_facts: true
   tasks:
-    - shell: yum -q repolist
+    - shell: yum -q repolist | grep -iv "repo id"
       register: yum_repolist
 
     - shell: subscription-manager repos --list-enabled | grep -E "^Repo ID"
       register: subsc_man
+      when: false
 
     - debug:
-        var: subsc_man 
+        var: yum_repolist
