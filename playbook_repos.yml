@@ -8,4 +8,4 @@
       register: subsc_man
 
     - debug:
-        var: subsc_man | to_nice_json
+        var: subsc_man 
