@@ -9,4 +9,4 @@
       when: false
 
     - debug:
-        var: yum_repolist
+        var: yum_repolist.stdout_lines | length
