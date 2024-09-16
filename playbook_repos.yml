@@ -1,5 +1,15 @@
 - hosts: clienterhel8.s2linux.local
   gather_facts: true
   tasks:
+    - shell: yum -q repolist
+      register: yum_repolist
+
+    - shell: subscription-manager repos --list-enabled
+      register: subsc_man
+
     - debug:
-        var: ansible_facts
+       msg: |
+         Saída do subscription-manager
+         {{ subsc_man }}
+         Saída do yum repolist
+         {{ yum_repolist }}
