@@ -2,10 +2,6 @@
   become: false
   gather_facts: true
   tasks:
-    - shell: id
-      become: true
-      become_user: roger
-
     - shell: yum -q repolist | grep -iv "repo id"
       register: yum_repolist
 

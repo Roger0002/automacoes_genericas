@@ -1,0 +1,9 @@
+- hosts: clienterhel8.s2linux.local
+  gather_facts: false
+  tasks:
+    - debug: Variável {{ nhonho }}
+
+    - name: Disable all RHSM repositories
+      community.general.rhsm_repository:
+        name: '*'
+        state: disabled
