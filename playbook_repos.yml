@@ -11,3 +11,4 @@
     - debug:
         msg: Executar Zabbix Sender
       when: yum_repolist.stdout_lines | length == subsc_man.stdout_lines | length
+
