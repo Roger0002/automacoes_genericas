@@ -2,11 +2,12 @@
   become: false
   gather_facts: true
   tasks:
-    - shell: yum -q repolist | grep -iv "repo id"
+    - shell: yum -q repolist | grep -Eiv "^repo id"
       register: yum_repolist
 
     - shell: subscription-manager repos --list-enabled | grep -E "^Repo ID"
       register: subsc_man
 
-    - shell: zabbix_sender
+    - debug:
+        msg: Executar Zabbix Sender
       when: yum_repolist.stdout_lines | length > subsc_man.stdout_lines | length
