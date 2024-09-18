@@ -1,6 +1,6 @@
 - hosts: clienterhel8.s2linux.local
-  become: false
-  gather_facts: true
+  become: true
+  gather_facts: false
   tasks:
     - shell: yum -q repolist | grep -Eiv "^repo id"
       register: yum_repolist
