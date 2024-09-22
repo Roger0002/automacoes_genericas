@@ -22,5 +22,5 @@
     - name: Garante que a resolução reversa tenha ocorrido
       ansible.builtin.assert:
         that: meuhost != 'NXDOMAIN'
-        fail_msg: Não foi possível resolver {{ meuhost }}.
+        fail_msg: Não foi possível fazer a resolução reversa de {{ host_recebido }}.
 ...
