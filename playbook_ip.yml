@@ -19,7 +19,8 @@
           ansible.builtin.set_fact:
             meuhost: "{{ lookup('community.general.dig', meuhost + '/PTR') }}"
 
-    - name: Exibe o certo
-      ansible.builtin.debug:
-        var: meuhost
-
+    - name: Garante que a resolução reversa tenha ocorrido
+      ansible.builtin.assert:
+        that: meuhost != 'NXDOMAIN'
+      fail_msg: Não foi possível resolver {{ meuhost }}.
+...
