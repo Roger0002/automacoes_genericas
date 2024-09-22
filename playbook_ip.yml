@@ -13,10 +13,10 @@
       rescue:
         - name: Resignifica a variável do host para um FQDN
           ansible.builtin.set_fact:
-            host_recebido: "{{ lookup('community.general.dig', host_recebido + '/PTR') }}"
+            host_recebido_fqdn: "{{ lookup('community.general.dig', host_recebido + '/PTR') }}"
 
       always:
         - name: Exibe o certo
           ansible.builtin.debug:
-            var: host_recebido
+            var: host_recebido_fqdn
 
