@@ -3,6 +3,10 @@
   hosts: localhost
   gather_facts: false
   tasks:
+    - name: Tenta fazer o reverso
+      ansible.builtin.debug:
+        msg: "{{ lookup('community.general.dig', host_recebido/PTR) }}"
+
     - name: Testa se {{ host_recebido }} é de fato um IP
       ansible.builtin.assert:
         that: host_recebido | ansible.utils.ipaddr == false
