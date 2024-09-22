@@ -3,20 +3,24 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Bloco que testa se {{ host_recebido }} é de fato um IP
+    - name: Teste
+      ansible.builtin.set_fact:
+        meuhost: "{{ host_recebido }}"
+
+    - name: Bloco que testa se {{ meuhost }} é de fato um IP
       block:
-        - name: Teste
+        - name: Testa se {{ meuhost }} é um IP
           ansible.builtin.assert:
-            that: host_recebido | ansible.utils.ipaddr == false
+            that: meuhost | ansible.utils.ipaddr == false
             fail_msg: "O usuário deve ter digitado um IP. Vamos tentar arrumar"
 
       rescue:
         - name: Resignifica a variável do host para um FQDN
           ansible.builtin.set_fact:
-            host_recebido_fqdn: "{{ lookup('community.general.dig', host_recebido + '/PTR') }}"
+            meuhost: "{{ lookup('community.general.dig', meuhost + '/PTR') }}"
 
       always:
         - name: Exibe o certo
           ansible.builtin.debug:
-            var: host_recebido_fqdn
+            var: meuhost
 
