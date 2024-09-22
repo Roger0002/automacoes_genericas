@@ -7,6 +7,8 @@
       ansible.builtin.set_fact:
         meuhost: "{{ host_recebido }}"
 
+    - debug:
+        var: meuhost | ansible.utils.ipaddr
     - name: Bloco que testa se {{ meuhost }} é de fato um IP
       block:
         - name: Testa se {{ meuhost }} é um IP
