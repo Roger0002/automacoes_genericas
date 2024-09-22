@@ -11,7 +11,7 @@
       block:
         - name: Testa se {{ meuhost }} é um IP
           ansible.builtin.assert:
-            that: meuhost | ansible.utils.ipaddr == false
+            that: meuhost | ansible.utils.ipaddr != false
             fail_msg: "O usuário deve ter digitado um IP. Vamos tentar arrumar"
 
       rescue:
@@ -19,8 +19,7 @@
           ansible.builtin.set_fact:
             meuhost: "{{ lookup('community.general.dig', meuhost + '/PTR') }}"
 
-      always:
-        - name: Exibe o certo
-          ansible.builtin.debug:
-            var: meuhost
+    - name: Exibe o certo
+      ansible.builtin.debug:
+        var: meuhost
 
