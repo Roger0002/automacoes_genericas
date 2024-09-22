@@ -1,0 +1,10 @@
+---
+- name: Play de teste
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Testa se {{ ip_recebido }} é de fato um IP
+      ansible.builtin.assert:
+        that: {{ ip_recebido | ansible.utils.ipaddr }}
+      fail_msg: "Você deve ter digitado um IP. Digite o FQDN da máquina."
+
