@@ -11,7 +11,7 @@
       block:
         - name: Testa se {{ meuhost }} é um IP
           ansible.builtin.assert:
-            that: meuhost | ansible.utils.ipaddr != false
+            that: meuhost | ansible.utils.ipaddr != true
             fail_msg: "O usuário deve ter digitado um IP. Vamos tentar arrumar"
 
       rescue:
