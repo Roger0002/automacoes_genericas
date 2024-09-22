@@ -6,5 +6,5 @@
     - name: Testa se {{ host_recebido }} é de fato um IP
       ansible.builtin.assert:
         that: host_recebido | ansible.utils.ipaddr
-      fail_msg: "Você deve ter digitado um IP. Digite o FQDN da máquina."
+        fail_msg: "Você deve ter digitado um IP. Digite o FQDN da máquina."
 
