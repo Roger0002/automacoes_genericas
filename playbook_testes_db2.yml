@@ -1,10 +1,17 @@
 ---
 - hosts: clienterhel7.s2linux.local
-  gather_facts: true
+  gather_facts: false
+  become: false
   tasks:
-    - community.general.pids:
+    - name: Verifica se o processo do DB2 está no ar
+      community.general.pids:
         name: db2
-      register: saida_processos
+        ignore_case: true
+      register: lista_processos
 
-    - debug:
-        var: saida_processos
+    - name: Exibe uma mensagem dizendo se está ou não
+      ansible.builtin.assert:
+        that: lista_processos | length == 0
+        fail_msg: Processo do DB2 está no ar
+        success_msg: Processo do DB2 fora
+...
