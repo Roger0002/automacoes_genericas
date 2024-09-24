@@ -3,7 +3,7 @@
   gather_facts: true
   tasks:
     - community.general.pids:
-        name: rsyslogd
+        name: db2
       register: saida_processos
 
     - debug:
