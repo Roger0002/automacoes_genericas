@@ -21,7 +21,7 @@
     - name: Mostra
       ansible.builtin.assert:
         that: >
-          ansible_mounts | selectattr('mount', 'equalto', '/home') > 1085071360 and
-          ansible_mounts | selectattr('mount', 'equalto', '/boot') > 536870912
+          (ansible_mounts | selectattr('mount', 'equalto', '/home'))[0].size_available > 1085071360 and
+          (ansible_mounts | selectattr('mount', 'equalto', '/boot'))[0].size_available > 536870912
         fail_msg: Não validado
 ...
