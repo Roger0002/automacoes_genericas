@@ -20,5 +20,5 @@
 
     - name: Mostra
       ansible.builtin.debug:
-        var: ansible_facts['mounts'] | selectattr('mount', 'equalto', '/boot') 
+        var: ansible_facts['mounts'] | selectattr('mount', 'equalto', '/home') 
 ...
