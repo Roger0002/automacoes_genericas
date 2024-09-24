@@ -11,7 +11,7 @@
 
     - name: Exibe uma mensagem dizendo se está ou não
       ansible.builtin.assert:
-        that: lista_processos | length == 0
+        that: lista_processos.pids | length == 0
         fail_msg: Processo do DB2 está no ar
         success_msg: Processo do DB2 fora
 ...
