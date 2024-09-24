@@ -1,5 +1,6 @@
 ---
-- hosts: clienterhel7.s2linux.local
+- name: Play que testa se um processo está no ar ou não
+  hosts: clienterhel7.s2linux.local
   gather_facts: false
   become: false
   tasks:
