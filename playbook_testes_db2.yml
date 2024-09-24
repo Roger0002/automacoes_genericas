@@ -2,5 +2,9 @@
 - hosts: clienterhel7.s2linux.local
   gather_facts: true
   tasks:
+    - community.general.pids:
+        name: rsyslogd
+      register: saida_processos
+
     - debug:
-        var: ansible_facts
+        var: saida_processos
