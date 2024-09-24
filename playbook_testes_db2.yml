@@ -1,7 +1,7 @@
 ---
 - name: Play que testa se um processo está no ar ou não
   hosts: clienterhel7.s2linux.local
-  gather_facts: false
+  gather_facts: true
   become: false
   tasks:
     - name: Verifica se o processo do rsyslogd está no ar
@@ -20,5 +20,5 @@
 
     - name: Mostra
       ansible.builtin.debug:
-        var: ansible_facts
+        var: ansible_facts['ansible_mounts']
 ...
