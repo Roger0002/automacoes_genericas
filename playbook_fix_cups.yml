@@ -12,7 +12,7 @@
 
     - name: Bloco onde se verifica a ocorrência da vulnerabilidade
       block:
-        - name: mostra
+        - name: Verifica se um dos pacotes está instalado
           ansible.builtin.assert:
             that: >
               'cups' not in ansible_facts.packages.keys() and
