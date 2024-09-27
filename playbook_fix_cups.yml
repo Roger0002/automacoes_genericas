@@ -27,9 +27,12 @@
           ansible.builtin.slurp:
             src: /etc/cups/cups-browsed.conf
           register: cupsbrowsed_conf
+        - name: cria um fato
+          ansible.builtin.set_fact:
+            teste: "{{ cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') }}"
 
         - name: Caso o parâmetro BrowseRemoteProtocols esteja com cups, verifica se o serviço está no ar ou habilitado no boot
-          when: cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') != ''
+          when: teste != ""
           debug:
             msg: "{{ cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') }}"
             #          ansible.builtin.assert:
