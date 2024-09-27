@@ -29,7 +29,7 @@
           register: cupsbrowsed_conf
 
         - name: Caso o parâmetro BrowseRemoteProtocols esteja com cups, verifica se o serviço está no ar ou habilitado no boot
-          when: cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') is not null
+          when: cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') is not ""
           debug:
             msg: "{{ cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') }}"
             #          ansible.builtin.assert:
