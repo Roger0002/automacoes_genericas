@@ -9,7 +9,7 @@
 
     - name: mostra
       ansible.builtin.debug:
-        var: ansible_facts
+        var: ansible_facts.packages.keys()
 
 
           #    - name: Verifica se os pacotes sucetíveis à vulnerabilidade estão instalados
