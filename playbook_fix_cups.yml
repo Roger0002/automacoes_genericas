@@ -10,8 +10,8 @@
     - name: mostra
       ansible.builtin.assert:
         that: >
-          ("cups" not in ansible_facts.packages.keys()) or
-          ("cups-filters" not in ansible_facts.packages.keys())
+          "'cups' not in ansible_facts.packages.keys()" or
+          "'cups-filters' not in ansible_facts.packages.keys()"
         fail_msg: Ruim
         success_msg: Bom
 
