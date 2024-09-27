@@ -1,5 +1,10 @@
 ---
-- name: Play verificador de vulnerabilidade
+
+# Playbook que verifica se o servidor está vulnerável à falha relatada no boletin RHSB-2024-002
+# https://access.redhat.com/security/vulnerabilities/RHSB-2024-002
+# Desenvolvido por Roger Príncipe
+
+- name: Play verificador de vulnerabilidade (cups)
   hosts: clienterhel7.s2linux.local
   gather_facts: false
   tasks:
