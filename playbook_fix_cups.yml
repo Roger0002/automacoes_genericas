@@ -7,14 +7,26 @@
       ansible.builtin.package_facts:
         manager: auto
 
-    - name: mostra
-      ansible.builtin.assert:
-        #that: "'cups' not in ansible_facts.packages.keys()"
-        that: >
-          'cups' not in ansible_facts.packages.keys() and 
-          'cups-filters' not in ansible_facts.packages.keys()
-        fail_msg: Ruim
-        success_msg: Bom
+    - name: Coleta os facts relacionados aos serviços da máquina
+      ansible.builtin.service_facts:
+
+    - name: Teste
+      debug:
+        var: ansible_facts.services
+
+    - Name: Bloco onde se verifica a ocorrência da vulnerabilidade
+      block:
+        - name: mostra
+          ansible.builtin.assert:
+            that: >
+              'cups' not in ansible_facts.packages.keys() and
+              'cups-filters' not in ansible_facts.packages.keys()
+            success_msg: Sistema não está vulnerável
+              #      rescue:
+              #        - name: Verifica se o serviço está no ar
+              #          ansible.builtin.assert:
+              #            that: ansible_facts.services.cups-browsed
+
 
 
           #    - name: Verifica se os pacotes sucetíveis à vulnerabilidade estão instalados
