@@ -32,6 +32,6 @@
           when: cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') != ""
           ansible.builtin.assert:
             that: >
-              ansible_facts.services['cups-browsed.service'].state == running or
-              ansible_facts.services['cups-browsed.service'].status == enabled
+              ansible_facts.services['cups-browsed.service'].state == 'running' or
+              ansible_facts.services['cups-browsed.service'].status == 'enabled'
 ...
