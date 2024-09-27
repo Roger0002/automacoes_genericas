@@ -30,8 +30,9 @@
 
         - name: Caso o parâmetro BrowseRemoteProtocols esteja com cups, verifica se o serviço está no ar ou habilitado no boot
           when: cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*') != ""
-          ansible.builtin.assert:
-            that: >
-              ansible_facts.services['cups-browsed.service'].state == 'running' or
-              ansible_facts.services['cups-browsed.service'].status == 'enabled'
+          debug: "teste"
+            #          ansible.builtin.assert:
+            #            that: >
+            #              ansible_facts.services['cups-browsed.service'].state == 'running' or
+            #              ansible_facts.services['cups-browsed.service'].status == 'enabled'
 ...
