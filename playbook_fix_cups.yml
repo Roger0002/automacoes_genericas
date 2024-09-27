@@ -10,10 +10,6 @@
     - name: Coleta os facts relacionados aos serviços da máquina
       ansible.builtin.service_facts:
 
-    - name: Teste
-      debug:
-        var: ansible_facts.services
-
     - name: Bloco onde se verifica a ocorrência da vulnerabilidade
       block:
         - name: mostra
@@ -36,6 +32,8 @@
           when: retorno_cupsbrowsed_conf != ""
           ansible.builtin.assert:
             that: >
-              ansible_facts.services['cups-browsed.service'].state == 'running' or
-              ansible_facts.services['cups-browsed.service'].status == 'enabled'
+              ansible_facts.services['cups-browsed.service'].state != 'running' and
+              ansible_facts.services['cups-browsed.service'].status != 'enabled'
+            success_msg: "Sistema não está vulnerável"
+            fail_msg: "Sistema vulnerável ou potencialmente vulnerável. Verifique."
 ...
