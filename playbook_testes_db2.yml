@@ -18,10 +18,12 @@
         success_msg: Processo do rsyslogd fora
       when: false
 
-    - name: Mostra
+    - name: Exemplo para o Diego
       ansible.builtin.assert:
         that: >
-          (ansible_mounts | selectattr('mount', 'equalto', '/home'))[0].size_available > 1085071360 and
-          (ansible_mounts | selectattr('mount', 'equalto', '/boot'))[0].size_available > 536870912
-        fail_msg: Não validado
+          (ansible_mounts | selectattr('mount', 'equalto', '/opt'))[0].size_available > 5368709120 and
+          (ansible_mounts | selectattr('mount', 'equalto', '/tmp'))[0].size_available > 1073741824
+        fail_msg: O /tmp e/ou o /opt possui espaço em disco insuficiente
+        success_msg: O /tmp e o /opt possuem espaço em disco suficiente
+
 ...

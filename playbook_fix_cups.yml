@@ -1,0 +1,15 @@
+---
+- name: Play verificador de vulnerabilidade
+  hosts: clienterhel7.s2linux.local
+  gather_facts: false
+  tasks:
+    - name: Coleta os facts relacionados aos pacotes instalados na máquina
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: mostra
+      ansible.builtin.debug:
+        var: ansible_facts
+
+
+          #    - name: Verifica se os pacotes sucetíveis à vulnerabilidade estão instalados
