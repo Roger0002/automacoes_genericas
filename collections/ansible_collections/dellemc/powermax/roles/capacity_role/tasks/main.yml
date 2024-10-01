@@ -1,0 +1,84 @@
+---
+# This role does Capacity Based Placement Optimization
+
+# Tasks to find the best suitable PowerMax storage pool
+# for the given size and service level
+
+- name: Show error message on invalid cap_unit
+  ansible.builtin.fail:
+    msg: "Please provide valid value for cap_unit."
+  when: not cap_unit or cap_unit|length == 0
+
+- name: Show error message on invalid choice of cap_unit
+  ansible.builtin.fail:
+    msg: "cap_unit supports 'GB' or 'TB'."
+  when: cap_unit != 'GB' and cap_unit != 'TB'
+
+- name: Set fact for type of size
+  ansible.builtin.set_fact:
+    capacity_role_size_type: "{{ capacity_role_size | type_debug }}"
+
+- name: Show error message on invalid type of size
+  ansible.builtin.fail:
+    msg: "Please provide valid value of size."
+  when: capacity_role_size_type != 'float' and capacity_role_size_type != 'int'
+
+- name: Take size with no change if the cap_unit is GB
+  ansible.builtin.set_fact:
+    capacity_role_size_gb: "{{ capacity_role_size | float }}"
+  when: cap_unit == 'GB'
+
+- name: Convert size to GB if the cap_unit is TB
+  ansible.builtin.set_fact:
+    capacity_role_size_gb: "{{ capacity_role_size * 1024 | float }}"
+  when: cap_unit == 'TB'
+
+- name: Get the list of PowerMax arrays from Unisphere
+  dellemc.powermax.info:
+    unispherehost: "{{ unispherehost }}"
+    verifycert: "{{ verifycert }}"
+    user: "{{ user }}"
+    password: "{{ password }}"
+  register: capacity_role_arrays
+
+- name: Get the list of PowerMax arrays from Unisphere
+  dellemc.powermax.info:
+    unispherehost: "{{ unispherehost }}"
+    verifycert: "{{ verifycert }}"
+    user: "{{ user }}"
+    password: "{{ password }}"
+    serial_no: "{{ item }}"
+    gather_subset:
+      - "srp"
+  loop: "{{ capacity_role_arrays.Arrays | list }}"
+  register: capacity_role_pool_list
+
+- name: Get the list of pools across all discovered arrays
+  dellemc.powermax.storagepool:
+    unispherehost: "{{ unispherehost }}"
+    verifycert: "{{ verifycert }}"
+    user: "{{ user }}"
+    password: "{{ password }}"
+    serial_no: "{{ item.0.item }}"
+    pool: "{{ item.1.srpId }}"
+    state: 'present'
+  register: capacity_role_pools
+  with_subelements:
+    - "{{ capacity_role_pool_list.results }}"
+    - StorageResourcePools
+
+- name: Get best suitable Pool using our python sorting module
+  register: capacity_role_assigned_pool
+  dellemc.powermax.process_storage_pool_dict:
+    unispherehost: "{{ unispherehost }}"
+    verifycert: "{{ verifycert }}"
+    user: "{{ user }}"
+    password: "{{ password }}"
+    pool_data: "{{ capacity_role_pools.results | map(attribute='pool_details') | list }}"
+    size: "{{ capacity_role_size_gb }}"
+    service_level: "{{ service_level | default(omit) }}"
+    sg_name: "{{ sg_name | default(omit) }}"
+
+- name: Debug print assigned pool
+  ansible.builtin.debug:
+    var: capacity_role_assigned_pool
