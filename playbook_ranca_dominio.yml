@@ -5,8 +5,8 @@
     meu_servidor: webserver.dominio.com.br
   tasks:
     - debug:
-        msg: Com domínio: {{ meu_servidor }}
+        msg: "Com domínio: {{ meu_servidor }}"
 
     - debug:
-        msg: Sem domínio: {{ meu_servidor | regex_replace('.dominio.com.br$') }}
+        msg: "Sem domínio: {{ meu_servidor | regex_replace('.dominio.com.br$') }}"
 
