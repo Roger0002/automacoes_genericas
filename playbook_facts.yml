@@ -5,4 +5,7 @@
         gather_subset:
           - '!all,!min'
           - local
+
+    - debug:
+        var: ansible_facts['distribution_major_version']
 ...
