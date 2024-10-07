@@ -2,5 +2,7 @@
   gather_facts: false
   tasks:
     - setup:
-        fact_path: /root
+        gather_subset:
+          - '!all,!min'
+          - local
 ...
