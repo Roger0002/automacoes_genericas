@@ -1,0 +1,5 @@
+---
+- name: Não faz nada
+  hosts: localhost
+  tasks: []
+...
