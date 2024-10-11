@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  vars:
+    variavel: "Roger\t\nRoger\nRoger\r\tAAAA"
+  tasks:
+    - debug:
+        var: variaval
