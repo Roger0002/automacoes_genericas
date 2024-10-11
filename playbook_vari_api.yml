@@ -5,5 +5,5 @@
   tasks:
     - name: Exibe o valor das variáveis
       ansible.builtin.debug:
-        msg: Os três TAMs da núclea são\: {{ plataforma }}, {{ automacao }} e {{ middleware }}
+        msg: "Os três TAMs da núclea são: {{ plataforma }}, {{ automacao }} e {{ middleware }}"
 ...
