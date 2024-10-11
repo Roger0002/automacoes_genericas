@@ -3,4 +3,4 @@
   vars:
     variavel: "Roger\t\nRoger\nRoger\r\tAAAA"
   tasks:
-    - shell: echo -e {{ variavel }}
+    - shell: 'echo -e "{{ variavel }}"'
