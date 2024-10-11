@@ -1,0 +1,9 @@
+---
+- name: Playbook testador da passagem de extra vars via chamada de api
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Exibe o valor das variáveis
+      ansible.builtin.debug:
+        msg: Os três TAMs da núclea são\: {{ plataforma }}, {{ automacao }} e {{ middleware }}
+...
