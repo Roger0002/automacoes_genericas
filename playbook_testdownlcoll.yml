@@ -2,7 +2,7 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - community.dns.inameserver_info:
+    - community.dns.nameserver_info:
       name:
         - www.uol.com.br
       register: result
