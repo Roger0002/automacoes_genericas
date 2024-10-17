@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
   gather_facts: false
-    #  vars:
-    #ansible_collections_paths: "./collections"
+  vars:
+    ansible_collections_paths: "./testeee/collections"
   tasks:
     - community.dns.nameserver_info:
         name:
