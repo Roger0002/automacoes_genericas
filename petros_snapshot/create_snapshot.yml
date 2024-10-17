@@ -1,0 +1,32 @@
+---
+- name: Play criador de snapshot
+  hosts: localhost
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Mostra a variável vinda do survey
+      ansible.builtin.debug:
+        var: lista_servidores_str
+
+    - name: Arruma a lista vinda do survey
+      ansible.builtin.set_fact:
+        lista_servidores: "{{ lista_servidores_str | split('\n') }}"
+
+    - name: exibe a lista arrumada
+      ansible.builtin.debug:
+        var: lista_servidores
+
+    - name: Criar SnapShot para a máquina {{ item }}
+      loop: "{{ lista_servidores }}"
+      community.vmware.vmware_guest_snapshot:
+        hostname: heathcliff.petros.com.br
+        username: usuario_vcenter
+        password: senha_vcenter
+        datacenter: PETROS-DC
+        folder: /PETROS-DC/vm/
+        name: "{{ item }}"
+        validate_certs: false
+        state: present
+        snapshot_name: snap1
+        description: Snapshot - {{ item }}
+      when: false
