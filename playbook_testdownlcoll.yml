@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - community.dns.inameserver_info:
+      name:
+        - www.uol.com
+      register: result
+
+    - name: Show nameservers for www.example.com
+      ansible.builtin.debug:
+        msg: "{{ result }}"
