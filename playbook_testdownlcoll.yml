@@ -4,7 +4,7 @@
   tasks:
     - community.dns.inameserver_info:
       name:
-        - www.uol.com
+        - www.uol.com.br
       register: result
 
     - name: Show nameservers for www.example.com
