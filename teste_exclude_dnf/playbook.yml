@@ -1,0 +1,8 @@
+---
+- hosts: frontend1.lab5.example.com
+  gather_facts: false
+  tasks:
+    - ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        exclude: "nss*"
