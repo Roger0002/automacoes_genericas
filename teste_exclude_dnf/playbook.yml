@@ -1,5 +1,5 @@
 ---
-- hosts: frontend2.lab5.example.com
+- hosts: frontend3.lab5.example.com
   gather_facts: false
   tasks:
     - ansible.builtin.dnf:
