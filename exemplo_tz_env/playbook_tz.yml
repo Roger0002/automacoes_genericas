@@ -2,8 +2,8 @@
 - hosts: localhost
   gather_facts: false
   tasks:
+    - community.general.timezone:
+        name: America/Sao_Paulo
 
     - ansible.builtin.debug:
         msg: "{{ lookup('pipe', 'date') }}"
-      environment:
-        TZ: America/Sao_Paulo
