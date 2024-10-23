@@ -3,8 +3,10 @@
   gather_facts: false
   tasks:
     - ansible.builtin.shell: date
+      environment:
+        TZ: America/Sao_Paulo
       register: aaa
 
     - debug:
-        var: aaa
+        var: aaa.stdout
         
