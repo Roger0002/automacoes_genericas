@@ -3,4 +3,8 @@
   gather_facts: false
   tasks:
     - ansible.builtin.shell: date
+      register: aaa
+
+    - debug:
+        var: aaa
         
