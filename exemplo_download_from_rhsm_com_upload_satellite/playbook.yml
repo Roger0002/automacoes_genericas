@@ -1,0 +1,50 @@
+---
+- name: Baixa a mídia do RHEL
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Obtem o access token
+      ansible.builtin.uri:
+        url: https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+        method: POST
+        body_format: form-urlencoded
+        body:
+          grant_type: refresh_token
+          client_id: rhsm-api
+          refresh_token: "{{ offline_token }}"
+          # A variável indicada acima virá de fora do playbook, podendo ser uma credential
+        return_content: true
+      register: saida_com_access_token
+
+    - name: Obtem a URL de download
+      ansible.builtin.uri:
+        url: https://api.access.redhat.com/management/v1/images/{{ checksum_imagem }}/download
+        # A variável indicada no parâmetro acima também virá de fora
+        method: GET
+        headers:
+          accept: application/json
+          Authorization: Bearer {{ saida_com_access_token.json.access_token }}
+      register: saida_com_url_download
+
+    - name: Faz o download da imagem
+      ansible.builtin.uri:
+        url: "{{ saida_com_url_download.url }}"
+        dest: .
+        headers:          
+          Authorization: Bearer {{ saida_com_access_token.json.access_token }}
+      register: vari_download
+
+    - name: Faz o upload da imagem para o repositório do Satellite
+      theforeman.foreman.content_upload:
+        username: admin
+        password: 'RedHat123!'
+        server_url: https://satellite.s2linux.local
+        validate_certs: false
+        repository: ImageRepo
+        product: ImageProd
+        organization: S2 Linux
+        src: "{{ vari_download.path }}"
+        # Opção para uso de asterísco (conforme dúvida durante conversa com cliente)
+        # src: "{{ lookup('fileglob', './virtio-win-*.iso') | split(',') | first }}"
+...
+
