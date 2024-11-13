@@ -1,2 +1,0 @@
-nilfs-utils
-util-linux-core

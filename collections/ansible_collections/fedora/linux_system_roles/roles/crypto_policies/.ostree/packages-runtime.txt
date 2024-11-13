@@ -1,2 +1,0 @@
-crypto-policies
-crypto-policies-scripts

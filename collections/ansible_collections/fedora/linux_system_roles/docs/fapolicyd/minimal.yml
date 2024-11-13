@@ -1,6 +1,0 @@
-# SPDX-License-Identifier: MIT
----
-- name: Minimal fapolicyd role invocation
-  hosts: all
-  roles:
-    - fedora.linux_system_roles.fapolicyd

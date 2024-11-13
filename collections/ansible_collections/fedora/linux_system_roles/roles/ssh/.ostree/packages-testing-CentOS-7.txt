@@ -1,3 +1,0 @@
-bash
-man-db
-openssh-ldap

@@ -1,2 +1,0 @@
-httpd-tools
-skopeo

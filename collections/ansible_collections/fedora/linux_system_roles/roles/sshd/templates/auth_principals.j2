@@ -1,5 +1,0 @@
-{{ ansible_managed | comment }}
-{{ "willshersystems:ansible-sshd" | comment(prefix="", postfix="") }}
-{% for principal in item.value %}
-{{ principal }}
-{% endfor %}

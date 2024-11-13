@@ -1,2 +1,0 @@
-keylime-registrar
-keylime-verifier

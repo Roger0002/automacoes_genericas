@@ -1,3 +1,0 @@
-httpd-tools
-podman
-squid

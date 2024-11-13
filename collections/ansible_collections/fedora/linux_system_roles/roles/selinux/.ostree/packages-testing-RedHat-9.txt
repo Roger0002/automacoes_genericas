@@ -1,2 +1,0 @@
-policycoreutils-python-utils
-util-linux-core

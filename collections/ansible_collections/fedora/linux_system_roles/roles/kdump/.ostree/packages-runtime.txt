@@ -1,4 +1,0 @@
-grubby
-iproute
-kexec-tools
-openssh-clients

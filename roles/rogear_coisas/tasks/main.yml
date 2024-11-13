@@ -1,0 +1,12 @@
+---
+# tasks file for rogear_coisas
+- name: Retrieve name servers of two DNS names
+  community.dns.nameserver_info:
+    name:
+      - www.uol.com.br
+      - www.google.com
+  register: result
+
+- name: Show nameservers
+  ansible.builtin.debug:
+    msg: '{{ result }}'

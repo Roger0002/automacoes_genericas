@@ -1,3 +1,0 @@
-python311-dbus-python
-python311-cryptography
-python3-pyasn1

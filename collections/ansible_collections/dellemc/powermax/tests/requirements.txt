@@ -1,6 +1,0 @@
-pytest
-pytest-xdist
-pytest-mock
-pytest-cov
-pytest-forked
-mock

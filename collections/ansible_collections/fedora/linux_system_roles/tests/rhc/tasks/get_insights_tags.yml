@@ -1,6 +1,0 @@
-# SPDX-License-Identifier: MIT
----
-- name: Get state of insights tag file
-  stat:
-    path: "{{ __rhc_insights_tags }}"
-  register: test_tags
