@@ -15,7 +15,7 @@
           ansible.builtin.shell: cat devwas.yml | grep devwas | awk '{print $1}'
           register: saida1
 
-        - name: Exibe
+        - name: Exibe a saída
           ansible.builtin.debug:
             var: saida1.stdout
 
