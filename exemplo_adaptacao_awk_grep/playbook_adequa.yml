@@ -1,0 +1,52 @@
+---
+- name: Simulação (grep + awk)
+  hosts: localhost
+  gather_facts: false
+  vars:
+    lista_saida_final: []
+  tasks:
+    - name: Bloco da abordagem tradicional
+      when: false
+      block:
+      # Esse bloco tenta implementar apenas o trecho que
+      # gera a lista a ser iterada no for do cliente (no
+      # caso, oc get project | grep devwas | awk '{print $1}')
+        - name: Executa o comando com os redirecionamentos
+          ansible.builtin.shell: cat devwas.yml | grep devwas | awk '{print $1}'
+          register: saida1
+
+        - name: Exibe
+          ansible.builtin.debug:
+            var: saida1.stdout
+
+    - name: Bloco da abordagem correta
+      # Esse bloco vai além: Não apenas constroi a lista a ser
+      # iterada, como também implementa o iterador, como se até
+      # mesmo o for estivesse aqui (for i in $(oc get project |
+      # grep devwas | awk '{print $1}'); do oc scale --replicas=0
+      # dc/apache-was -n $i && oc scale --replicas=0 deploy/devwas -n $i;
+      # done)
+      when: true
+      block:
+        - name: Executa o comando sem os redirecionamentos
+          ansible.builtin.shell: cat devwas.yml
+          register: saida2
+
+        - name: Gera a lista de itens com devwas
+          loop: "{{ saida2.stdout_lines | select('search', 'devwas') }}"
+          ansible.builtin.set_fact:
+            lista_saida_final: "{{ lista_saida_final + [item | split(' ') | first] }}"
+
+        - name: Exibe a lista 'lista_saida_final' para fins de demonstração
+          ansible.builtin.debug:
+            var: lista_saida_final
+
+        - name: Aguarda um tempo para a lista ser apreciada
+          ansible.builtin.wait_for:
+            timeout: 10
+
+        - name: Itera na lista alimentada na task anterior para executar comandos
+          loop: "{{ lista_saida_final }}"
+          ansible.builtin.include_tasks:
+            file: comandos.yml
+...
