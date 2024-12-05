@@ -1,0 +1,10 @@
+---
+- name: Executa o primeiro
+  ansible.builtin.shell: "echo 'oc scale --replicas=0 dc/apache-was -n {{ item }}'"
+  register: primeiro_comando
+
+- name: Executa o segundo
+  ansible.builtin.shell: "echo 'oc scale --replicas=0 deploy/devwas -n {{ item }}'"
+  register: segundo_comando
+  when: primeiro_comando.rc == 0
+...
