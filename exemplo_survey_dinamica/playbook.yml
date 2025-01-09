@@ -31,7 +31,16 @@
         controller_username: admin
         controller_password: redhat
         name: Imprimir branch
-        state: "present"
+        state: exists
         survey_enabled: yes
-        survey_spec: "{{ lookup('file', 'survey.json') }}" 
-
+        survey_spec:
+          name: Simple
+          description: ""
+          spec:
+            - type: multiplechoice
+              question_name: "Escolha a branch desejada:"
+              variable: "escolha"
+              choices: "{{ vari }}"
+              min: 0
+              max: 99999
+              required: true

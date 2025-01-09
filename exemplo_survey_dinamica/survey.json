@@ -4,8 +4,8 @@
     "spec": [
         {
     	"type": "multiplechoice",
-    	"question_name": "achoice",
-    	"question_description": "Need one of these",
+    	"question_name": "Escolha a branch desejada:",
+    	"question_description": "",
     	"variable": "single_choice",
     	"choices": ["one", "two"],
     	"min": 0,
