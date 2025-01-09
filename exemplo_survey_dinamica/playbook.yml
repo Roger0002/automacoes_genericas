@@ -28,7 +28,7 @@
     - name: Create Ping job template
       ansible.controller.job_template:
         name: Imprimir branch
-        state: "exists"
+        state: "present"
         survey_enabled: yes
         survey_spec: "{{ lookup('file', 'survey.json') }}" 
 
