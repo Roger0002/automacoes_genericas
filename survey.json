@@ -9,7 +9,7 @@
     	"variable": "long_answer",
     	"choices": "",
     	"min": 5,
-    	"max": "",
+    	"max": "999",
     	"required": false,
     	"default": "Leeloo Minai Lekarariba-Laminai-Tchai Ekbat De Sebat"
         },
