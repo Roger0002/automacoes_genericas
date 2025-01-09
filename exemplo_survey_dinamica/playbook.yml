@@ -1,0 +1,27 @@
+---
+- name: Play que obtem a lista de branches de um repositório
+  hosts: localhost
+  gather_facts: false
+  vars:
+    repo: patch_management1
+    tkn_github: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      37386239313438616164623330656139626364346365636335643335313862353539623061353065
+      3337353633303437653066333966303662666431663937390a316564346132323165623738393063
+      64313831616130623438666163393035613634366432306134333537326364363066386665366635
+      6336383961373063610a303538373431623636633266383762316537323361646332633366313232
+      34383331346366333565613532303931626437343963313237346139353762323166383536633166
+      3730343738653865613536343566356236373337393331363634
+  tasks:
+    - name: Pega  lista de branches do repositório {{ repo }}
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/roger0002/{{ repo }}/branches
+        method: GET
+        headers:
+          Authorization: token $tkn_github
+      register: saida_get
+
+    - name: Mostra
+      ansible.builtin.debug:
+        var: saida_get
+
