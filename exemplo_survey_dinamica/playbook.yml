@@ -23,5 +23,5 @@
 
     - name: Mostra
       ansible.builtin.debug:
-        var: saida_get
+        var: saida_get.json | map(attribute="name")
 
