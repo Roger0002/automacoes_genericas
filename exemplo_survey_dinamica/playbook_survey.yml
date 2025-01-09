@@ -1,0 +1,9 @@
+---
+- name: Play da survey
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Exibe o que foi escolhido
+      ansible.builtin.debug:
+        var: escolha
+...
