@@ -19,7 +19,7 @@
     	"question_description": "What is a short answer",
     	"variable": "short_answer",
     	"choices": "",
-    	"min": "",
+    	"min": 0,
     	"max": 7,
     	"required": false,
     	"default": "leeloo"
@@ -30,7 +30,7 @@
     	"question_description": "I should be required",
     	"variable": "reqd_answer",
     	"choices": "",
-    	"min": "",
+    	"min": 0,
     	"max": 9999,
     	"required": true,
     	"default": "NOT OPTIONAL"
@@ -41,7 +41,7 @@
     	"question_description": "Need one of these",
     	"variable": "single_choice",
     	"choices": ["one", "two"],
-    	"min": "",
+    	"min": 0,
     	"max": 9999999,
     	"required": false,
     	"default": "one"
@@ -52,7 +52,7 @@
     	"question_description": "Can have multiples of these",
     	"variable": "multi_choice",
     	"choices": ["one", "two", "three"],
-    	"min": "",
+    	"min": 0,
     	"max": 9999,
     	"required": false,
     	"default": "one\nthree"
