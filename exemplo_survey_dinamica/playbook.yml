@@ -28,6 +28,8 @@
     - name: Create Ping job template
       ansible.controller.job_template:
         controller_host: aap-control1.s2linux.local
+        controller_username: admin
+        controller_password: redhat
         name: Imprimir branch
         state: "present"
         survey_enabled: yes
