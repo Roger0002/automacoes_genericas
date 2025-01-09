@@ -21,7 +21,14 @@
           Authorization: token {{ tkn_github }}
       register: saida_get
 
-    - name: Mostra
-      ansible.builtin.debug:
-        var: saida_get.json | map(attribute="name")
+    - name: Cria uma variável para armazenar
+      ansible.builtin.set_fact:
+        vari: saida_get.json | map(attribute="name")
+
+    - name: Create Ping job template
+      ansible.controller.job_template:
+        name: Imprimir branch
+        state: "exists"
+        survey_enabled: yes
+        survey_spec: "{{ lookup('file', 'my_survey.json') }}" 
 
