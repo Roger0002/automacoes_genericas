@@ -30,5 +30,5 @@
         name: Imprimir branch
         state: "exists"
         survey_enabled: yes
-        survey_spec: "{{ lookup('file', 'my_survey.json') }}" 
+        survey_spec: "{{ lookup('file', 'survey.json') }}" 
 
