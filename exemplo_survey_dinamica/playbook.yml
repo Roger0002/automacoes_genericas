@@ -23,7 +23,7 @@
 
     - name: Cria uma variável para armazenar
       ansible.builtin.set_fact:
-        vari: saida_get.json | map(attribute="name")
+        vari: "{{ saida_get.json | map(attribute='name') }}"
 
     - name: Create Ping job template
       ansible.controller.job_template:
