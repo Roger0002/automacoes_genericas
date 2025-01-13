@@ -7,12 +7,12 @@
   consul_policy:
     name: foo-access
     rules: |
-        key "foo" {
-            policy = "read"
-        }
-        key "private/foo" {
-            policy = "deny"
-        }
+      key "foo" {
+          policy = "read"
+      }
+      key "private/foo" {
+          policy = "deny"
+      }
   register: result
 
 - assert:
@@ -25,15 +25,15 @@
   consul_policy:
     name: foo-access
     rules: |
-        key "foo" {
-            policy = "read"
-        }
-        key "private/foo" {
-            policy = "deny"
-        }
-        event "bbq" {
-            policy = "write"
-        }
+      key "foo" {
+          policy = "read"
+      }
+      key "private/foo" {
+          policy = "deny"
+      }
+      event "bbq" {
+          policy = "write"
+      }
   register: result
 
 - assert:
@@ -45,15 +45,15 @@
   consul_policy:
     name: foo-access
     rules: |
-        key "foo" {
-            policy = "read"
-        }
-        key "private/foo" {
-            policy = "deny"
-        }
-        event "bbq" {
-            policy = "write"
-        }
+      key "foo" {
+          policy = "read"
+      }
+      key "private/foo" {
+          policy = "deny"
+      }
+      event "bbq" {
+          policy = "write"
+      }
   register: result
 
 - assert:

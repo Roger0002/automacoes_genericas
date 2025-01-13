@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- name: "Create initial rule set to use"
+- name: Create initial rule set to use
   copy:
     dest: "{{ iptables_tests }}"
     content: |
@@ -21,14 +21,14 @@
       -A POSTROUTING -o eth0 -j MASQUERADE
       COMMIT
 
-- name: "Restore initial state"
+- name: Restore initial state
   iptables_state:
     path: "{{ iptables_tests }}"
     state: restored
   async: "{{ ansible_timeout }}"
   poll: 0
 
-- name: "Create partial ruleset only specifying input"
+- name: Create partial ruleset only specifying input
   copy:
     dest: "{{ iptables_tests }}"
     content: |
@@ -39,20 +39,19 @@
       -A INPUT -m state --state NEW,ESTABLISHED -j ACCEPT
       COMMIT
 
-- name: "Check restoring partial state"
+- name: Check restoring partial state
   iptables_state:
     path: "{{ iptables_tests }}"
     state: restored
   check_mode: true
   register: iptables_state
 
-
-- name: "assert that no changes are detected in check mode"
+- name: assert that no changes are detected in check mode
   assert:
     that:
       - iptables_state is not changed
 
-- name: "Restore partial state"
+- name: Restore partial state
   iptables_state:
     path: "{{ iptables_tests }}"
     state: restored
@@ -60,7 +59,7 @@
   async: "{{ ansible_timeout }}"
   poll: 0
 
-- name: "assert that no changes are made"
+- name: assert that no changes are made
   assert:
     that:
       - iptables_state is not changed

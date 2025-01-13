@@ -13,7 +13,7 @@
         c: 3
   run_command_calls:
     - command: [/testbin/facter, --json]
-      environ: &env-def {check_rc: true}
+      environ: &env-def { check_rc: true }
       rc: 0
       out: >
         { "a": 1, "b": 2, "c": 3 }

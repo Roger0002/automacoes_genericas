@@ -35,4 +35,3 @@
     - import_tasks: set_multi_value.yml
     - import_tasks: unset_multi_value.yml
   when: git_installed is succeeded and git_version.stdout is version(git_version_supporting_includes, ">=")
-...

@@ -6,7 +6,7 @@
   uri:
     url: "{{ url }}/admin/"
     status_code: 200
-    validate_certs: no
+    validate_certs: false
   register: result
   until: result.status == 200
   retries: 10
@@ -41,9 +41,9 @@
     realm: "{{ realm }}"
     client_id: "{{ client_id }}"
     state: present
-    redirect_uris: '{{redirect_uris1}}'
-    attributes: '{{client_attributes1}}'
-    protocol_mappers: '{{protocol_mappers1}}'
+    redirect_uris: "{{redirect_uris1}}"
+    attributes: "{{client_attributes1}}"
+    protocol_mappers: "{{protocol_mappers1}}"
   register: desire_client_not_present
 
 - name: Desire client again with same props
@@ -55,9 +55,9 @@
     realm: "{{ realm }}"
     client_id: "{{ client_id }}"
     state: present
-    redirect_uris: '{{redirect_uris1}}'
-    attributes: '{{client_attributes1}}'
-    protocol_mappers: '{{protocol_mappers1}}'
+    redirect_uris: "{{redirect_uris1}}"
+    attributes: "{{client_attributes1}}"
+    protocol_mappers: "{{protocol_mappers1}}"
   register: desire_client_when_present_and_same
 
 - name: Check client again with same props
@@ -69,10 +69,10 @@
     realm: "{{ realm }}"
     client_id: "{{ client_id }}"
     state: present
-    redirect_uris: '{{redirect_uris1}}'
-    attributes: '{{client_attributes1}}'
-    protocol_mappers: '{{protocol_mappers1}}'
-    authorization_services_enabled: False
+    redirect_uris: "{{redirect_uris1}}"
+    attributes: "{{client_attributes1}}"
+    protocol_mappers: "{{protocol_mappers1}}"
+    authorization_services_enabled: false
   check_mode: true
   register: check_client_when_present_and_same
 
@@ -91,11 +91,11 @@
     realm: "{{ realm }}"
     client_id: "{{ client_id }}"
     state: present
-    redirect_uris: '{{redirect_uris1}}'
-    attributes: '{{client_attributes1}}'
-    protocol_mappers: '{{protocol_mappers1}}'
-    authorization_services_enabled: False
-    service_accounts_enabled: True
+    redirect_uris: "{{redirect_uris1}}"
+    attributes: "{{client_attributes1}}"
+    protocol_mappers: "{{protocol_mappers1}}"
+    authorization_services_enabled: false
+    service_accounts_enabled: true
   check_mode: true
   register: check_client_when_present_and_changed
 

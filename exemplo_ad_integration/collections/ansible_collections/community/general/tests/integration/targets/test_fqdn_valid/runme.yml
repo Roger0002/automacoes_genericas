@@ -5,4 +5,4 @@
 
 - hosts: localhost
   roles:
-    - {role: test_fqdn_valid}
+    - { role: test_fqdn_valid }

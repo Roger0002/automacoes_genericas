@@ -20,11 +20,11 @@
     - "{{ loop_device4 | default('') }}"
   when:
     - item|length > 0
-  command: "lvmdevices --deldev {{ item }}"
+  command: lvmdevices --deldev {{ item }}
   ignore_errors: true
 
 - name: Detach loop devices
-  command: "losetup -d {{ item }}"
+  command: losetup -d {{ item }}
   loop:
     - "{{ loop_device1 | default('') }}"
     - "{{ loop_device2 | default('') }}"
@@ -37,4 +37,4 @@
   file:
     path: "{{ remote_tmp_dir }}/img{{ item }}"
     state: absent
-  with_sequence: 'count=4'
+  with_sequence: count=4

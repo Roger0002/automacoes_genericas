@@ -1,5 +1,4 @@
 ---
-
 # Playbook que verifica se o servidor está vulnerável à falha relatada no boletin RHSB-2024-002
 # https://access.redhat.com/security/vulnerabilities/RHSB-2024-002
 # Desenvolvido por Roger Príncipe
@@ -34,11 +33,9 @@
             retorno_cupsbrowsed_conf: "{{ cupsbrowsed_conf['content'] | b64decode | regex_search('^BrowseRemoteProtocols.*cups.*', multiline=true)}}"
 
         - name: Caso o parâmetro BrowseRemoteProtocols esteja com cups, verifica se o serviço está no ar ou habilitado no boot
-          when: retorno_cupsbrowsed_conf != ""
+          when: retorno_cupsbrowsed_conf | length > 0
           ansible.builtin.assert:
             that: >
-              ansible_facts.services['cups-browsed.service'].state != 'running' and
-              ansible_facts.services['cups-browsed.service'].status != 'enabled'
-            success_msg: "Sistema não está vulnerável"
-            fail_msg: "Sistema vulnerável ou potencialmente vulnerável. Verifique."
-...
+              ansible_facts.services['cups-browsed.service'].state != 'running' and ansible_facts.services['cups-browsed.service'].status != 'enabled'
+            success_msg: Sistema não está vulnerável
+            fail_msg: Sistema vulnerável ou potencialmente vulnerável. Verifique.

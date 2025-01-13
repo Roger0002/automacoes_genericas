@@ -6,5 +6,4 @@
 - name: Alimenta a lista criada anteriormente com as conexões com DNS configurado
   ansible.builtin.set_fact:
     conexoes_nm_com_dns: "{{ conexoes_nm_com_dns + [item] }}"
-  when: "(saida_nmcli_mostra_conexoes.stdout | replace(' ', '') | split(':'))[1] != '--'"
-...
+  when: (saida_nmcli_mostra_conexoes.stdout | replace(' ', '') | split(':'))[1] != '--'

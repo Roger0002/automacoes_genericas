@@ -12,7 +12,7 @@
         - name: Testa se {{ meuhost }} é um IP
           ansible.builtin.assert:
             that: meuhost | ansible.utils.ipaddr == false
-            fail_msg: "O usuário deve ter digitado um IP. Vamos tentar arrumar"
+            fail_msg: O usuário deve ter digitado um IP. Vamos tentar arrumar
 
       rescue:
         - name: Resignifica a variável do host para um FQDN
@@ -23,4 +23,3 @@
       ansible.builtin.assert:
         that: meuhost != 'NXDOMAIN'
         fail_msg: Não foi possível fazer a resolução reversa de {{ host_recebido }}.
-...

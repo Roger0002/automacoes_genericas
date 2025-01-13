@@ -3,4 +3,3 @@
   hosts: clienterhel[7-9].s2linux.local
   gather_facts: true
   tasks: []
-...

@@ -7,7 +7,7 @@
 
 - name: test-modify_inactive_option 1 - create test file
   copy:
-    content: |
+    content: |2
 
       [section1]
       # Uncomment the line below to enable foo
@@ -31,7 +31,7 @@
 
 - name: test-modify_inactive_option 1 - set expected content and get current ini file content
   set_fact:
-    expected1: |
+    expected1: |2
 
       [section1]
       # Uncomment the line below to enable foo
@@ -46,10 +46,9 @@
       - result1.msg == 'option changed'
       - content1 == expected1
 
-
 - name: test-modify_inactive_option 2 - create test file
   copy:
-    content: |
+    content: |2
 
       [section1]
       # Uncomment the line below to enable foo
@@ -68,12 +67,12 @@
 
 - name: test-modify_inactive_option 2 - read content from output file
   slurp:
-      src: "{{ output_file }}"
+    src: "{{ output_file }}"
   register: output_content
 
 - name: test-modify_inactive_option 2 - set expected content and get current ini file content
   set_fact:
-    expected2: |
+    expected2: |2
 
       [section1]
       foo = bar
@@ -88,7 +87,6 @@
       - result2 is changed
       - result2.msg == 'option added'
       - content2 == expected2
-
 
 - name: test-modify_inactive_option 3 - remove foo=bar with modify_inactive_option set to true to ensure it doesn't have effect for removal
   ini_file:
@@ -107,8 +105,8 @@
 
 - name: test-modify_inactive_option 3 - set expected content and get current ini file content
   set_fact:
-    expected3: |
-  
+    expected3: |2
+
       [section1]
       # Uncomment the line below to enable foo
       # foo = bar

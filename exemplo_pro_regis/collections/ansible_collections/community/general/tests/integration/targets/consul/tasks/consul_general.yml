@@ -54,7 +54,7 @@
     port: 8501
     scheme: https
     token: "{{ consul_management_token }}"
-    ca_path: '{{ remote_dir }}/cert.pem'
+    ca_path: "{{ remote_dir }}/cert.pem"
   register: result
 
 - assert:

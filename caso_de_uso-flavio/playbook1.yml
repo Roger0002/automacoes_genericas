@@ -1,5 +1,4 @@
 ---
-
 - name: Play de atribuição Grupo - Variável
   hosts: localhost
   gather_facts: false
@@ -8,15 +7,14 @@
       ansible.builtin.set_stats:
         data:
           servidor:
-            - "clienterhel6.s2linux.local"
-            - "clienterhel7.s2linux.local"
+            - clienterhel6.s2linux.local
+            - clienterhel7.s2linux.local
       when: grupo_esc == "Ambiente Legado"
 
     - name: Define os servidores para a escolha \'Ambiente Novo\'
       ansible.builtin.set_stats:
         data:
           servidor:
-            - "clienterhel8.s2linux.local"
-            - "clienterhel9.s2linux.local"
+            - clienterhel8.s2linux.local
+            - clienterhel9.s2linux.local
       when: grupo_esc == "Ambiente Novo"
-  

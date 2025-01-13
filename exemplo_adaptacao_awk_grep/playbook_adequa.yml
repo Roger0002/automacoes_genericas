@@ -49,4 +49,3 @@
           loop: "{{ lista_saida_final }}"
           ansible.builtin.include_tasks:
             file: comandos.yml
-...

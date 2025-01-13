@@ -5,4 +5,4 @@
   tasks:
     - name: Tarefa que reinicia a(s) máquina(s)
       ansible.builtin.reboot:
-        msg: "Reiniciando a máquina {{ inventory_hostname }}..."
+        msg: Reiniciando a máquina {{ inventory_hostname }}...

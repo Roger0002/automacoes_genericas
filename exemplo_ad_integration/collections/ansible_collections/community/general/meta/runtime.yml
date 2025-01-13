@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-requires_ansible: '>=2.13.0'
+requires_ansible: ">=2.13.0"
 action_groups:
   consul:
     - consul_auth_method
@@ -34,13 +34,11 @@ plugin_routing:
     actionable:
       tombstone:
         removal_version: 2.0.0
-        warning_text: Use the 'default' callback plugin with 'display_skipped_hosts
-          = no' and 'display_ok_hosts = no' options.
+        warning_text: Use the 'default' callback plugin with 'display_skipped_hosts = no' and 'display_ok_hosts = no' options.
     full_skip:
       tombstone:
         removal_version: 2.0.0
-        warning_text: Use the 'default' callback plugin with 'display_skipped_hosts
-          = no' option.
+        warning_text: Use the 'default' callback plugin with 'display_skipped_hosts = no' option.
     hipchat:
       deprecation:
         removal_version: 10.0.0
@@ -50,8 +48,7 @@ plugin_routing:
     stderr:
       tombstone:
         removal_version: 2.0.0
-        warning_text: Use the 'default' callback plugin with 'display_failed_stderr
-          = yes' option.
+        warning_text: Use the 'default' callback plugin with 'display_failed_stderr = yes' option.
   connection:
     docker:
       redirect: community.docker.docker
@@ -180,19 +177,16 @@ plugin_routing:
     rhn_channel:
       deprecation:
         removal_version: 10.0.0
-        warning_text: RHN is EOL, please contact the community.general maintainers
-          if still using this; see the module documentation for more details.
+        warning_text: RHN is EOL, please contact the community.general maintainers if still using this; see the module documentation for more details.
     rhn_register:
       deprecation:
         removal_version: 10.0.0
-        warning_text: RHN is EOL, please contact the community.general maintainers
-          if still using this; see the module documentation for more details.
+        warning_text: RHN is EOL, please contact the community.general maintainers if still using this; see the module documentation for more details.
     stackdriver:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This module relied on HTTPS APIs that do not exist anymore,
-          and any new development in the direction of providing an alternative should
-          happen in the context of the google.cloud collection.
+        warning_text: This module relied on HTTPS APIs that do not exist anymore, and any new development in the direction of providing an alternative should happen
+          in the context of the google.cloud collection.
     ali_instance_facts:
       tombstone:
         removal_version: 3.0.0
@@ -256,8 +250,7 @@ plugin_routing:
     flowdock:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This module relied on HTTPS APIs that do not exist anymore and
-          there is no clear path to update.
+        warning_text: This module relied on HTTPS APIs that do not exist anymore and there is no clear path to update.
     foreman:
       tombstone:
         removal_version: 2.0.0
@@ -303,13 +296,11 @@ plugin_routing:
     gcp_forwarding_rule:
       tombstone:
         removal_version: 2.0.0
-        warning_text: Use google.cloud.gcp_compute_forwarding_rule or google.cloud.gcp_compute_global_forwarding_rule
-          instead.
+        warning_text: Use google.cloud.gcp_compute_forwarding_rule or google.cloud.gcp_compute_global_forwarding_rule instead.
     gcp_healthcheck:
       tombstone:
         removal_version: 2.0.0
-        warning_text: Use google.cloud.gcp_compute_health_check, google.cloud.gcp_compute_http_health_check
-          or google.cloud.gcp_compute_https_health_check instead.
+        warning_text: Use google.cloud.gcp_compute_health_check, google.cloud.gcp_compute_http_health_check or google.cloud.gcp_compute_https_health_check instead.
     gcp_target_proxy:
       tombstone:
         removal_version: 2.0.0
@@ -329,13 +320,11 @@ plugin_routing:
     gcspanner:
       tombstone:
         removal_version: 2.0.0
-        warning_text: Use google.cloud.gcp_spanner_database and/or google.cloud.gcp_spanner_instance
-          instead.
+        warning_text: Use google.cloud.gcp_spanner_database and/or google.cloud.gcp_spanner_instance instead.
     github_hooks:
       tombstone:
         removal_version: 2.0.0
-        warning_text: Use community.general.github_webhook and community.general.github_webhook_info
-          instead.
+        warning_text: Use community.general.github_webhook and community.general.github_webhook_info instead.
     hana_query:
       redirect: community.sap_libs.sap_hdbsql
     hetzner_failover_ip:
@@ -385,13 +374,11 @@ plugin_routing:
     logicmonitor:
       tombstone:
         removal_version: 1.0.0
-        warning_text: The logicmonitor_facts module is no longer maintained and the
-          API used has been disabled in 2017.
+        warning_text: The logicmonitor_facts module is no longer maintained and the API used has been disabled in 2017.
     logicmonitor_facts:
       tombstone:
         removal_version: 1.0.0
-        warning_text: The logicmonitor_facts module is no longer maintained and the
-          API used has been disabled in 2017.
+        warning_text: The logicmonitor_facts module is no longer maintained and the API used has been disabled in 2017.
     memset_memstore_facts:
       tombstone:
         removal_version: 3.0.0
@@ -505,8 +492,7 @@ plugin_routing:
     oneview_logical_interconnect_group_facts:
       tombstone:
         removal_version: 3.0.0
-        warning_text: Use community.general.oneview_logical_interconnect_group_info
-          instead.
+        warning_text: Use community.general.oneview_logical_interconnect_group_info instead.
     oneview_network_set_facts:
       tombstone:
         removal_version: 3.0.0
@@ -746,28 +732,23 @@ plugin_routing:
     webfaction_app:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This module relied on HTTPS APIs that do not exist anymore and
-          there is no clear path to update.
+        warning_text: This module relied on HTTPS APIs that do not exist anymore and there is no clear path to update.
     webfaction_db:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This module relied on HTTPS APIs that do not exist anymore and
-          there is no clear path to update.
+        warning_text: This module relied on HTTPS APIs that do not exist anymore and there is no clear path to update.
     webfaction_domain:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This module relied on HTTPS APIs that do not exist anymore and
-          there is no clear path to update.
+        warning_text: This module relied on HTTPS APIs that do not exist anymore and there is no clear path to update.
     webfaction_mailbox:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This module relied on HTTPS APIs that do not exist anymore and
-          there is no clear path to update.
+        warning_text: This module relied on HTTPS APIs that do not exist anymore and there is no clear path to update.
     webfaction_site:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This module relied on HTTPS APIs that do not exist anymore and
-          there is no clear path to update.
+        warning_text: This module relied on HTTPS APIs that do not exist anymore and there is no clear path to update.
     xenserver_guest_facts:
       tombstone:
         removal_version: 3.0.0
@@ -776,8 +757,7 @@ plugin_routing:
     rackspace:
       tombstone:
         removal_version: 9.0.0
-        warning_text: This doc fragment was used by rax modules, that relied on the deprecated
-          package pyrax.
+        warning_text: This doc fragment was used by rax modules, that relied on the deprecated package pyrax.
     _gcp:
       redirect: community.google._gcp
     docker:

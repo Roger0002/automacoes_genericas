@@ -19,14 +19,14 @@
         api_token: "{{ gitlab_api_token }}"
         api_url: "{{ gitlab_api_url }}"
         validate_certs: "{{ gitlab_validate_certs }}"
-        group: "some_nonexisting_group"
+        group: some_nonexisting_group
         name: "{{ gitlab_token_name }}"
         state: present
-        expires_at: '2025-01-01'
+        expires_at: "2025-01-01"
         access_level: developer
         scopes:
-        - api
-        - read_api
+          - api
+          - read_api
       register: create_pfail_token_status
   always:
     - name: Assert that token creation in nonexisting group failed
@@ -41,14 +41,14 @@
         api_token: "{{ gitlab_api_token }}"
         api_url: "{{ gitlab_api_url }}"
         validate_certs: "{{ gitlab_validate_certs }}"
-        group: "some_nonexisting_group"
+        group: some_nonexisting_group
         name: "{{ gitlab_token_name }}"
         state: present
-        expires_at: '2025-13-01'
+        expires_at: "2025-13-01"
         access_level: developer
         scopes:
-        - api
-        - read_api
+          - api
+          - read_api
       register: create_efail_token_status
   always:
     - name: Assert that token creation with invalid expires_at failed
@@ -65,11 +65,11 @@
     group: "{{ gitlab_group_name }}"
     name: "{{ gitlab_token_name }}"
     state: present
-    expires_at: '2024-12-31'
+    expires_at: "2024-12-31"
     access_level: developer
     scopes:
-    - api
-    - read_api
+      - api
+      - read_api
   register: create_token_status
 - name: Assert that token creation with valid arguments is successfull
   assert:
@@ -85,11 +85,11 @@
     group: "{{ gitlab_group_name }}"
     name: "{{ gitlab_token_name }}"
     state: present
-    expires_at: '2024-12-31'
+    expires_at: "2024-12-31"
     access_level: developer
     scopes:
-    - api
-    - read_api
+      - api
+      - read_api
   register: check_token_status
 - name: Assert that token creation without changes and recreate=never succeeds with status not changed
   assert:
@@ -105,11 +105,11 @@
     group: "{{ gitlab_group_name }}"
     name: "{{ gitlab_token_name }}"
     state: present
-    expires_at: '2024-12-31'
+    expires_at: "2024-12-31"
     access_level: developer
     scopes:
-    - api
-    - read_api
+      - api
+      - read_api
     recreate: state_change
   register: check_recreate_token_status
 - name: Assert that token creation without changes and recreate=state_change succeeds with status not changed
@@ -127,11 +127,11 @@
         group: "{{ gitlab_group_name }}"
         name: "{{ gitlab_token_name }}"
         state: present
-        expires_at: '2025-01-01'
+        expires_at: "2025-01-01"
         access_level: developer
         scopes:
-        - api
-        - read_api
+          - api
+          - read_api
       register: change_token_status
   always:
     - name: Assert that token change with recreate=never fails
@@ -148,11 +148,11 @@
     group: "{{ gitlab_group_name }}"
     name: "{{ gitlab_token_name }}"
     state: present
-    expires_at: '2025-01-01'
+    expires_at: "2025-01-01"
     access_level: developer
     scopes:
-    - api
-    - read_api
+      - api
+      - read_api
     recreate: state_change
   register: change_recreate_token_status
 - name: Assert that token change with recreate=state_change succeeds
@@ -169,11 +169,11 @@
     group: "{{ gitlab_group_name }}"
     name: "{{ gitlab_token_name }}"
     state: present
-    expires_at: '2025-01-01'
+    expires_at: "2025-01-01"
     access_level: developer
     scopes:
-    - api
-    - read_api
+      - api
+      - read_api
     recreate: always
   register: change_recreate1_token_status
 - name: Assert that token change with recreate=always succeeds
@@ -190,11 +190,11 @@
     group: "{{ gitlab_group_name }}"
     name: "{{ gitlab_token_name }}"
     state: absent
-    expires_at: '2024-12-31'
+    expires_at: "2024-12-31"
     access_level: developer
     scopes:
-    - api
-    - read_api
+      - api
+      - read_api
   register: revoke_token_status
 - name: Assert that token revocation succeeds
   assert:
@@ -209,11 +209,11 @@
     group: "{{ gitlab_group_name }}"
     name: "{{ gitlab_token_name }}"
     state: absent
-    expires_at: '2024-12-31'
+    expires_at: "2024-12-31"
     access_level: developer
     scopes:
-    - api
-    - read_api
+      - api
+      - read_api
   register: revoke_token_status
 - name: Assert that token revocation succeeds with status not changed
   assert:

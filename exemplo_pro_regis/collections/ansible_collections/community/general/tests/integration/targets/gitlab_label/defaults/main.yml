@@ -10,7 +10,7 @@ gitlab_project_group: ansible_test_group
 gitlab_branch: ansible_test_branch
 gitlab_first_label: ansible_test_label
 gitlab_first_label_color: "#112233"
-gitlab_first_label_description: "label description"
+gitlab_first_label_description: label description
 gitlab_first_label_priority: 10
 gitlab_second_label: ansible_test_second_label
 gitlab_second_label_color: "#445566"

@@ -13,9 +13,9 @@
     state: present
     scope: global
   loop:
-    - 'merge_request.create'
-    - 'merge_request.draft'
-    - 'merge_request.target=foobar'
+    - merge_request.create
+    - merge_request.draft
+    - merge_request.target=foobar
   register: set_result1
 
 - name: setting value
@@ -26,9 +26,9 @@
     state: present
     scope: global
   loop:
-    - 'merge_request.create'
-    - 'merge_request.draft'
-    - 'merge_request.target=foobar'
+    - merge_request.create
+    - merge_request.draft
+    - merge_request.target=foobar
   register: set_result2
 
 - name: getting the multi-value
@@ -76,4 +76,3 @@
       - set_result1.results[2].diff.after == ["merge_request.create", "merge_request.draft", "merge_request.target=foobar"]
       - set_result3.diff.before == ["merge_request.create", "merge_request.draft", "merge_request.target=foobar"]
       - set_result3.diff.after == "merge_request.create\n"
-...

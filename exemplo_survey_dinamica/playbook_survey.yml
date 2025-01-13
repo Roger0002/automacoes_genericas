@@ -6,4 +6,3 @@
     - name: Exibe o que foi escolhido
       ansible.builtin.debug:
         var: escolha
-...

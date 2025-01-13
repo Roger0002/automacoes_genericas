@@ -6,7 +6,7 @@
   delegate_to: "{{ item }}"
 
 - name: Constroi a lista de file systems
-  ansible.builtin.set_fact: 
+  ansible.builtin.set_fact:
     lista_fs: "{{ lista_fs + [item_a.mount] }}"
   loop: "{{ ansible_facts.mounts }}"
   loop_control:
@@ -18,4 +18,3 @@
     n_nos_fs_online: "{{ n_nos_fs_online + 1 }}"
   delegate_to: "{{ item }}"
   when: '"/var/fs_application" in lista_fs'
-...
