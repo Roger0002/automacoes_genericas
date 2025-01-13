@@ -3,7 +3,7 @@
 # GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- import_tasks: "setup_file.yml"
+- import_tasks: setup_file.yml
 
 - name: getting all system configs
   git_config_info:
@@ -20,7 +20,6 @@
   assert:
     that:
       - get_result1.config_value == ""
-      - 'get_result1.config_values == {}'
+      - get_result1.config_values == {}
       - get_result2.config_value == ""
       - 'get_result2.config_values == {"user.name": []}'
-...

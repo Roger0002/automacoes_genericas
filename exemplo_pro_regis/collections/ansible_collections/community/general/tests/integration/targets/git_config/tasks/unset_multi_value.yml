@@ -25,4 +25,3 @@
       - 'get_all_result.config_values == {"push.pushoption": []}'
       - unset_result.diff.before == ["merge_request.create", "merge_request.draft", "merge_request.target=foobar"]
       - unset_result.diff.after == "\n"
-...

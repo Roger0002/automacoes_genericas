@@ -1,5 +1,4 @@
 ---
-
 - name: Upgrade via leapp
   hosts: "{{ servidor }}"
   strategy: free
@@ -16,4 +15,3 @@
     - name: Faz a atualização da máquina {{ servidor }}
       ansible.builtin.import_role:
         name: infra.leapp.upgrade
-...

@@ -1,5 +1,4 @@
 ---
-
 - name: Play que lida com o Facts
   hosts: clienterhel8.s2linux.local
   gather_facts: false

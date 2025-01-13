@@ -32,14 +32,14 @@
         controller_password: redhat
         name: Imprimir branch
         state: present
-        survey_enabled: yes
+        survey_enabled: true
         survey_spec:
           name: Simple
           description: ""
           spec:
             - type: multiplechoice
               question_name: "Escolha a branch desejada:"
-              variable: "escolha"
+              variable: escolha
               choices: "{{ vari }}"
               min: 0
               max: 99999

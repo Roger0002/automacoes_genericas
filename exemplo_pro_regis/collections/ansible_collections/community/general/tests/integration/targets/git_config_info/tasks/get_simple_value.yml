@@ -14,14 +14,14 @@
 
 - name: getting simple file value2
   git_config_info:
-    name: "credential.https://some.com.username"
+    name: credential.https://some.com.username
     scope: "{{ item.git_scope }}"
     path: "{{ item.git_file | default(omit) }}"
   register: get_result2
 
 - name: getting not existing value
   git_config_info:
-    name: "user.email"
+    name: user.email
     scope: "{{ item.git_scope }}"
     path: "{{ item.git_file | default(omit) }}"
   register: get_result3
@@ -35,4 +35,3 @@
       - 'get_result2.config_values == {"credential.https://some.com.username": ["yolo"]}'
       - get_result3.config_value == ""
       - 'get_result3.config_values == {"user.email": []}'
-...

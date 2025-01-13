@@ -6,16 +6,16 @@
 ## testing support for optional spaces between brackets and section names
 
 - name: Test-section_name_spaces 1 (does legacy workaround still work) - create test file
-  ansible.builtin.copy:  # noqa risky-file-permissions
+  ansible.builtin.copy: # noqa risky-file-permissions
     dest: "{{ output_file }}"
     content: |
       [ foo ]
       ; bar=baz
 
 - name: Test-section_name_spaces 1 - update with optional spaces specified
-  community.general.ini_file:  # noqa risky-file-permissions
+  community.general.ini_file: # noqa risky-file-permissions
     path: "{{ output_file }}"
-    section: ' foo '
+    section: " foo "
     option: bar
     value: frelt
   register: result
@@ -37,16 +37,15 @@
       - result is changed
       - result.msg == 'option changed'
 
-
 - name: Test-section_name_spaces 2 (optional spaces omitted) - create test file
-  ansible.builtin.copy:  # noqa risky-file-permissions
+  ansible.builtin.copy: # noqa risky-file-permissions
     dest: "{{ output_file }}"
     content: |
       [ foo ]
       bar=baz"
 
 - name: Test-section_name_spaces 2 - update without optional spaces
-  community.general.ini_file:  # noqa risky-file-permissions
+  community.general.ini_file: # noqa risky-file-permissions
     path: "{{ output_file }}"
     section: foo
     option: bar
@@ -69,18 +68,17 @@
       - result is changed
       - result.msg == 'option changed'
 
-
 - name: Test-section_name_spaces 3 (legacy workaround when not required) - create test file
-  ansible.builtin.copy:  # noqa risky-file-permissions
+  ansible.builtin.copy: # noqa risky-file-permissions
     dest: "{{ output_file }}"
     content: |
       [foo]
       ; bar=baz
 
 - name: Test-section_name_spaces 3 - update with optional spaces specified
-  community.general.ini_file:  # noqa risky-file-permissions
+  community.general.ini_file: # noqa risky-file-permissions
     path: "{{ output_file }}"
-    section: ' foo '
+    section: " foo "
     option: bar
     value: frelt
   register: result

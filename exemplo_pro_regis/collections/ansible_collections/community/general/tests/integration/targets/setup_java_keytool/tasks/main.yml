@@ -20,15 +20,15 @@
   vars:
     params:
       files:
-        - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'
-        - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
-        - '{{ ansible_os_family }}.yml'
+        - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family }}.yml"
       paths:
-        - '{{ role_path }}/vars'
+        - "{{ role_path }}/vars"
   when: has_java_keytool
 
 - name: Install keytool
   package:
-    name: '{{ keytool_package_names }}'
+    name: "{{ keytool_package_names }}"
   become: true
   when: has_java_keytool

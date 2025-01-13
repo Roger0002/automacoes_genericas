@@ -20,4 +20,3 @@
     - name: Tarefa responsável por inserir a máquina no domínio do AD
       ansible.builtin.include_role:
         name: rhel-system-roles.ad_integration
-...

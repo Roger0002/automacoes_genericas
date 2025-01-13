@@ -18,7 +18,7 @@
   assert:
     that:
       - addition_result is changed
-    msg: "state=present shall add flatpak when absent"
+    msg: state=present shall add flatpak when absent
 
 - name: Test idempotency of addition - {{ method }}
   flatpak:
@@ -33,7 +33,7 @@
   assert:
     that:
       - double_addition_result is not changed
-    msg: "state=present shall not do anything when flatpak is already present"
+    msg: state=present shall not do anything when flatpak is already present
 
 # state=absent
 
@@ -49,7 +49,7 @@
   assert:
     that:
       - removal_result is changed
-    msg: "state=absent shall remove flatpak when present"
+    msg: state=absent shall remove flatpak when present
 
 - name: Test idempotency of removal - {{ method }}
   flatpak:
@@ -63,7 +63,7 @@
   assert:
     that:
       - double_removal_result is not changed
-    msg: "state=absent shall not do anything when flatpak is not present"
+    msg: state=absent shall not do anything when flatpak is not present
 
 # state=latest
 
@@ -80,7 +80,7 @@
   assert:
     that:
       - latest_result is changed
-    msg: "state=latest shall add flatpak when absent"
+    msg: state=latest shall add flatpak when absent
 
 - name: Test idempotency of state=latest - {{ method }}
   flatpak:
@@ -95,7 +95,7 @@
   assert:
     that:
       - double_latest_result is not changed
-    msg: "state=latest shall not do anything when flatpak is already present"
+    msg: state=latest shall not do anything when flatpak is already present
 
 - name: Cleanup after state=present test - {{ method }}
   flatpak:
@@ -119,7 +119,7 @@
   assert:
     that:
       - url_addition_result is changed
-    msg: "state=present with url as name shall add flatpak when absent"
+    msg: state=present with url as name shall add flatpak when absent
 
 - name: Test idempotency of addition with url - {{ method }}
   flatpak:
@@ -134,7 +134,7 @@
   assert:
     that:
       - double_url_addition_result is not changed
-    msg: "state=present with url as name shall not do anything when flatpak is already present"
+    msg: state=present with url as name shall not do anything when flatpak is already present
 
 # state=absent with url as name
 
@@ -163,26 +163,25 @@
 
 - when: url_removal_result is not failed
   block:
+    - name: Verify removal test result - {{ method }}
+      assert:
+        that:
+          - url_removal_result is changed
+        msg: state=absent with url as name shall remove flatpak when present
 
-  - name: Verify removal test result - {{ method }}
-    assert:
-      that:
-        - url_removal_result is changed
-      msg: "state=absent with url as name shall remove flatpak when present"
+    - name: Test idempotency of removal with url - {{ method }}
+      flatpak:
+        name: http://127.0.0.1:8000/repo/com.dummy.App1.flatpakref
+        state: absent
+        method: "{{ method }}"
+        no_dependencies: true
+      register: double_url_removal_result
 
-  - name: Test idempotency of removal with url - {{ method }}
-    flatpak:
-      name: http://127.0.0.1:8000/repo/com.dummy.App1.flatpakref
-      state: absent
-      method: "{{ method }}"
-      no_dependencies: true
-    register: double_url_removal_result
-
-  - name: Verify idempotency of removal with url test result - {{ method }}
-    assert:
-      that:
-        - double_url_removal_result is not changed
-      msg: "state=absent with url as name shall not do anything when flatpak is not present"
+    - name: Verify idempotency of removal with url test result - {{ method }}
+      assert:
+        that:
+          - double_url_removal_result is not changed
+        msg: state=absent with url as name shall not do anything when flatpak is not present
 
 - name: Make sure flatpak is really gone - {{ method }}
   flatpak:
@@ -206,7 +205,7 @@
   assert:
     that:
       - url_latest_result is changed
-    msg: "state=present with url as name shall add flatpak when absent"
+    msg: state=present with url as name shall add flatpak when absent
 
 - name: Test idempotency of state=latest with url - {{ method }}
   flatpak:
@@ -221,7 +220,7 @@
   assert:
     that:
       - double_url_latest_result is not changed
-    msg: "state=present with url as name shall not do anything when flatpak is already present"
+    msg: state=present with url as name shall not do anything when flatpak is already present
 
 - name: Cleanup after state=present with url test - {{ method }}
   flatpak:
@@ -247,7 +246,7 @@
   assert:
     that:
       - addition_result is changed
-    msg: "state=present shall add flatpak when absent"
+    msg: state=present shall add flatpak when absent
 
 - name: Test idempotency of addition with list - {{ method }}
   flatpak:
@@ -264,7 +263,7 @@
   assert:
     that:
       - double_addition_result is not changed
-    msg: "state=present shall not do anything when flatpak is already present"
+    msg: state=present shall not do anything when flatpak is already present
 
 - name: Test addition with list partially installed - {{ method }}
   flatpak:
@@ -282,7 +281,7 @@
   assert:
     that:
       - addition_result is changed
-    msg: "state=present shall add flatpak when absent"
+    msg: state=present shall add flatpak when absent
 
 - name: Test idempotency of addition with list partially installed - {{ method }}
   flatpak:
@@ -300,7 +299,7 @@
   assert:
     that:
       - double_addition_result is not changed
-    msg: "state=present shall not do anything when flatpak is already present"
+    msg: state=present shall not do anything when flatpak is already present
 
 # state=absent with list of packages
 
@@ -317,7 +316,7 @@
   assert:
     that:
       - removal_result is changed
-    msg: "state=absent shall remove flatpak when present"
+    msg: state=absent shall remove flatpak when present
 
 - name: Test idempotency of removal with list - {{ method }}
   flatpak:
@@ -332,7 +331,7 @@
   assert:
     that:
       - double_removal_result is not changed
-    msg: "state=absent shall not do anything when flatpak is not present"
+    msg: state=absent shall not do anything when flatpak is not present
 
 - name: Test removal with list partially removed - {{ method }}
   flatpak:
@@ -348,7 +347,7 @@
   assert:
     that:
       - removal_result is changed
-    msg: "state=absent shall remove flatpak when present"
+    msg: state=absent shall remove flatpak when present
 
 - name: Test idempotency of removal with list partially removed - {{ method }}
   flatpak:
@@ -364,7 +363,7 @@
   assert:
     that:
       - double_removal_result is not changed
-    msg: "state=absent shall not do anything when flatpak is not present"
+    msg: state=absent shall not do anything when flatpak is not present
 
 # state=latest with list of packages
 
@@ -383,7 +382,7 @@
   assert:
     that:
       - latest_result is changed
-    msg: "state=present shall add flatpak when absent"
+    msg: state=present shall add flatpak when absent
 
 - name: Test idempotency of state=latest with list - {{ method }}
   flatpak:
@@ -400,7 +399,7 @@
   assert:
     that:
       - double_latest_result is not changed
-    msg: "state=present shall not do anything when flatpak is already present"
+    msg: state=present shall not do anything when flatpak is already present
 
 - name: Test state=latest with list partially installed - {{ method }}
   flatpak:
@@ -418,7 +417,7 @@
   assert:
     that:
       - latest_result is changed
-    msg: "state=present shall add flatpak when absent"
+    msg: state=present shall add flatpak when absent
 
 - name: Test idempotency of state=latest with list partially installed - {{ method }}
   flatpak:
@@ -436,7 +435,7 @@
   assert:
     that:
       - double_latest_result is not changed
-    msg: "state=present shall not do anything when flatpak is already present"
+    msg: state=present shall not do anything when flatpak is already present
 
 - name: Cleanup after state=present with list test - {{ method }}
   flatpak:

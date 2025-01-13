@@ -15,7 +15,7 @@
     settings: whatever.settings
   run_command_calls:
     - command: [/testbin/python, -m, django, check, --no-color, --settings=whatever.settings, babaloo, yaba, daba, doo]
-      environ: &env-def {environ_update: {LANGUAGE: C, LC_ALL: C}, check_rc: true}
+      environ: &env-def { environ_update: { LANGUAGE: C, LC_ALL: C }, check_rc: true }
       rc: 0
       out: "whatever\n"
       err: ""

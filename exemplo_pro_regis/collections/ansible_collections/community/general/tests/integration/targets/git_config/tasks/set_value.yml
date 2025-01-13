@@ -36,4 +36,3 @@
       - set_result1.diff.after == "foo\n"
       - set_result2.diff.before == "foo\n"
       - set_result2.diff.after == "bar\n"
-...

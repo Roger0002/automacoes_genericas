@@ -14,7 +14,7 @@
   rescue:
     - name: Exibe uma mensagem caso a geração da lista de conexões tenha algum problema
       ansible.builtin.debug:
-        msg: "Problema na geração da lista de conexões"
+        msg: Problema na geração da lista de conexões
 
 - name: Cria a lista que receberá as conexões com DNS configurado
   ansible.builtin.set_fact:
@@ -38,6 +38,5 @@
   rescue:
     - name: Exibe uma mensagem caso a configuração do servidor DNS resulte em erro
       ansible.builtin.debug:
-        msg: "Problema na configuração dos servidores DNS"
+        msg: Problema na configuração dos servidores DNS
   when: conexoes_nm_com_dns | length == 1
-...

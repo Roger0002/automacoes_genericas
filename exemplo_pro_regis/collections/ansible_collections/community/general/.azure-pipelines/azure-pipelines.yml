@@ -18,20 +18,20 @@ pr:
       - stable-*
 
 schedules:
-  - cron: 0 8 * * *
+  - cron: "0 8 * * *"
     displayName: Nightly (main)
     always: true
     branches:
       include:
         - main
-  - cron: 0 10 * * *
+  - cron: "0 10 * * *"
     displayName: Nightly (active stable branches)
     always: true
     branches:
       include:
         - stable-9
         - stable-8
-  - cron: 0 11 * * 0
+  - cron: "0 11 * * 0"
     displayName: Weekly (old stable branches)
     always: true
     branches:
@@ -58,7 +58,7 @@ resources:
 pool: Standard
 
 stages:
-### Sanity
+  ### Sanity
   - stage: Sanity_devel
     displayName: Sanity devel
     dependsOn: []
@@ -112,7 +112,7 @@ stages:
             - test: 2
             - test: 3
             - test: 4
-### Units
+  ### Units
   - stage: Units_devel
     displayName: Units devel
     dependsOn: []
@@ -124,9 +124,9 @@ stages:
           targets:
             - test: 3.8
             - test: 3.9
-            - test: '3.10'
-            - test: '3.11'
-            - test: '3.12'
+            - test: "3.10"
+            - test: "3.11"
+            - test: "3.12"
   - stage: Units_2_17
     displayName: Units 2.17
     dependsOn: []
@@ -162,7 +162,7 @@ stages:
             - test: 3.5
             - test: "3.10"
 
-## Remote
+  ## Remote
   - stage: Remote_devel_extra_vms
     displayName: Remote devel extra VMs
     dependsOn: []
@@ -245,16 +245,16 @@ stages:
               test: rhel/8.7
             - name: RHEL 7.9
               test: rhel/7.9
-            # - name: FreeBSD 13.1
-            #   test: freebsd/13.1
-            # - name: FreeBSD 12.4
-            #   test: freebsd/12.4
+          # - name: FreeBSD 13.1
+          #   test: freebsd/13.1
+          # - name: FreeBSD 12.4
+          #   test: freebsd/12.4
           groups:
             - 1
             - 2
             - 3
 
-### Docker
+  ### Docker
   - stage: Docker_devel
     displayName: Docker devel
     dependsOn: []
@@ -322,7 +322,7 @@ stages:
             - 2
             - 3
 
-### Community Docker
+  ### Community Docker
   - stage: Docker_community_devel
     displayName: Docker (community images) devel
     dependsOn: []
@@ -342,7 +342,7 @@ stages:
             - 2
             - 3
 
-### Generic
+  ### Generic
   - stage: Generic_devel
     displayName: Generic devel
     dependsOn: []
@@ -352,8 +352,8 @@ stages:
           nameFormat: Python {0}
           testFormat: devel/generic/{0}/1
           targets:
-            - test: '3.8'
-            - test: '3.11'
+            - test: "3.8"
+            - test: "3.11"
   - stage: Generic_2_17
     displayName: Generic 2.17
     dependsOn: []
@@ -363,8 +363,8 @@ stages:
           nameFormat: Python {0}
           testFormat: 2.17/generic/{0}/1
           targets:
-            - test: '3.7'
-            - test: '3.12'
+            - test: "3.7"
+            - test: "3.12"
   - stage: Generic_2_16
     displayName: Generic 2.16
     dependsOn: []
@@ -374,9 +374,9 @@ stages:
           nameFormat: Python {0}
           testFormat: 2.16/generic/{0}/1
           targets:
-            - test: '2.7'
-            - test: '3.6'
-            - test: '3.11'
+            - test: "2.7"
+            - test: "3.6"
+            - test: "3.11"
   - stage: Generic_2_15
     displayName: Generic 2.15
     dependsOn: []
@@ -386,7 +386,7 @@ stages:
           nameFormat: Python {0}
           testFormat: 2.15/generic/{0}/1
           targets:
-            - test: '3.9'
+            - test: "3.9"
 
   - stage: Summary
     condition: succeededOrFailed()
@@ -409,10 +409,10 @@ stages:
       - Docker_2_16
       - Docker_2_15
       - Docker_community_devel
-# Right now all generic tests are disabled. Uncomment when at least one of them is re-enabled.
-#      - Generic_devel
-#      - Generic_2_17
-#      - Generic_2_16
-#      - Generic_2_15
+    # Right now all generic tests are disabled. Uncomment when at least one of them is re-enabled.
+    #      - Generic_devel
+    #      - Generic_2_17
+    #      - Generic_2_16
+    #      - Generic_2_15
     jobs:
       - template: templates/coverage.yml

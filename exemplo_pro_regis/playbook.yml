@@ -1,5 +1,4 @@
 ---
-
 - name: Teste
   hosts: localhost
   become: true
@@ -8,7 +7,8 @@
     arq_compressed: compressed.tar.gz
   tasks:
     - name: Cria
-      ansible.builtin.shell: "mkdir -p /runner/project/exemplo_pro_regis/diretorio_caotico/asdf; touch /runner/project/exemplo_pro_regis/diretorio_caotico/asdf/aaaa; pwd"
+      ansible.builtin.shell: mkdir -p /runner/project/exemplo_pro_regis/diretorio_caotico/asdf; touch /runner/project/exemplo_pro_regis/diretorio_caotico/asdf/aaaa;
+        pwd
       register: saida_modulo_shell
 
     - name: Compacta o conteúdo de um diretório
@@ -22,7 +22,7 @@
     - name: Mostra saida modulo archive
       ansible.builtin.debug:
         msg: "{{ saida_modulo_archive }}"
-         
+
     - name: Mostra saida modulo shell
       ansible.builtin.debug:
         msg: "{{ saida_modulo_shell }}"

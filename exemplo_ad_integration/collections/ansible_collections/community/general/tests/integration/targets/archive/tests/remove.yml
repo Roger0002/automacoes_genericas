@@ -20,7 +20,7 @@
   assert:
     that:
       - archive_remove_source_files is changed
-      - "archive_remove_source_files.archived | length == 3"
+      - archive_remove_source_files.archived | length == 3
 
 - name: Remove Archive - remove source files ({{ format }})
   file:
@@ -83,7 +83,7 @@
   assert:
     that:
       - archive_remove_source_directory is changed
-      - "archive_remove_source_directory.archived | length == 3"
+      - archive_remove_source_directory.archived | length == 3
 
 - name: Remove archive - remove source directory ({{ format }})
   file:
@@ -134,7 +134,7 @@
   assert:
     that:
       - archive_remove_source_excluding_path is changed
-      - "archive_remove_source_excluding_path.archived | length == 2"
+      - archive_remove_source_excluding_path.archived | length == 2
 
 - name: Remove archive - remove source excluding path ({{ format }})
   file:

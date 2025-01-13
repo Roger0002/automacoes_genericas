@@ -8,7 +8,7 @@
   tasks:
     - name: Valida o status no nó {{ inventory_hostname }}
       ansible.builtin.shell:
-        cmd: "cat /root/gpfs_state.txt"
+        cmd: cat /root/gpfs_state.txt
       register: saida_gpfs
 
     - name: Cria a variável que guardará o estado do GPFS
@@ -17,8 +17,8 @@
 
     - name: Verifica se o nó está active
       ansible.builtin.assert:
-        that: 'estado_gpfs == "active"'
-        fail_msg: 'Nó {{ inventory_hostname }} não está com o status do GPFS como active'
+        that: estado_gpfs == "active"
+        fail_msg: Nó {{ inventory_hostname }} não está com o status do GPFS como active
 
 - name: Play que valida se tem algum nó com o File System montado
   hosts: localhost
@@ -31,5 +31,4 @@
           - ('/var/fs_application' in hostvars['clienterhel7.s2linux.local'].ansible_facts.mounts | map(attribute='mount')) or
             ('/var/fs_application' in hostvars['clienterhel8.s2linux.local'].ansible_facts.mounts | map(attribute='mount')) or
             ('/var/fs_application' in hostvars['clienterhel9.s2linux.local'].ansible_facts.mounts | map(attribute='mount'))
-        fail_msg: "/var/fs_application não está montado em lugar nenhum"
-...
+        fail_msg: /var/fs_application não está montado em lugar nenhum

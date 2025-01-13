@@ -14,11 +14,10 @@
       - iptables
   become: true
 
-
 - name: include tasks
   vars:
-    iptables_saved: "/tmp/test_iptables_state.saved"
-    iptables_tests: "/tmp/test_iptables_state.tests"
+    iptables_saved: /tmp/test_iptables_state.saved
+    iptables_tests: /tmp/test_iptables_state.tests
 
   block:
     - name: include tasks to perform basic tests (check_mode, async, idempotency)
@@ -33,7 +32,6 @@
       include_tasks: tests/02-partial-restore.yml
       when:
         - xtables_lock is undefined
-
 
     - name: include tasks to test rollbacks
       include_tasks: tests/10-rollback.yml

@@ -1,3 +1,4 @@
+---
 - hosts: clienterhel8.s2linux.local
   gather_facts: false
   tasks:
@@ -6,13 +7,13 @@
 
     - name: test cluster
       community.mongodb.mongodb_atlas_cluster:
-        api_username: "API_user"
-        api_password: "API_passwort_or_token"
-        group_id: "GROUP_ID"
-        name: "testcluster"
+        api_username: API_user
+        api_password: API_passwort_or_token
+        group_id: GROUP_ID
+        name: testcluster
         mongo_db_major_version: "4.0"
-        cluster_type: "REPLICASET"
+        cluster_type: REPLICASET
         provider_settings:
-          provider_name: "GCP"
-          region_name: "EUROPE_WEST_3"
-          instance_size_name: "M10"
+          provider_name: GCP
+          region_name: EUROPE_WEST_3
+          instance_size_name: M10

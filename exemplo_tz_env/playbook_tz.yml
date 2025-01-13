@@ -11,6 +11,3 @@
     - name: Mostra o conteúdo da saída do comando date
       ansible.builtin.debug:
         var: variavel_saida_shell.stdout
-
-
-

@@ -3,8 +3,8 @@
   vars:
     variavel: "Roger\t\nRoger\nRoger\r\tAAAA"
   tasks:
-    - shell: 'echo -e "{{ variavel }}"'
-      register: aaa
+    - register: aaa
+      ansible.builtin.shell: echo -e "{{ variavel }}"
 
-    - debug:
+    - ansible.builtin.debug:
         var: aaa

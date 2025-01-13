@@ -9,4 +9,4 @@
 
 - name: Show nameservers
   ansible.builtin.debug:
-    msg: '{{ result }}'
+    msg: "{{ result }}"
