@@ -1,0 +1,65 @@
+---
+- name: Validador dos bancos (DB2)
+  hosts: clienterhel8.s2linux.local
+  gather_facts: false
+  become: true
+  vars:
+    ansible_user: roger
+    ansible_password: NewCastle
+  tasks:
+    - name: Identificar usuário da instância do DB2
+      block:
+        - name: Pega os PIDs dos processos do banco
+          community.general.pids:
+            pattern: db2sysc.*
+          register: processos
+
+        - name: Obtem o id do usuário do banco
+          ansible.builtin.slurp:
+            src: /proc/{{ processos.pids[0] }}/status
+          register: process_status
+
+        - name: Cria a variável que armazena o ID
+          ansible.builtin.set_fact:
+            uid_processo: "{{ (process_status.content | b64decode | regex_search('Uid.*', multilines=true) | split())[1] }}"
+
+        - name: Executa o getent passwd
+          ansible.builtin.command:
+            cmd: getent passwd {{ uid_processo }}
+          register: saida_getent
+
+        - name: Cria a variável com o nome do usuário do banco
+          ansible.builtin.set_fact:
+            usuario_banco: "{{ saida_getent.stdout | split(':') | first }}"
+
+    - name: Coletar lista de bancos de dados ativos
+      block:
+        - name: Cria a lista que receberá os nomes dos bancos
+          ansible.builtin.set_fact:
+            lista_bancos: []
+
+        - name: Executa o db2_list_active_databases
+          become_user: "{{ usuario_banco }}"
+          ansible.builtin.command:
+            cmd: /var/lib/pgsql/db2_list_active_databases.sh
+          register: saida_db2_list_databases
+
+        - name: Alimenta a lista com os nomes dos bancos
+          loop: "{{ saida_db2_list_databases.stdout_lines | select('search', 'Database name') }}"
+          ansible.builtin.set_fact:
+            lista_bancos: "{{ lista_bancos + [item | split('=') | last | trim] }}"
+
+    - name: Conectar e verificar cada banco de dados
+      block:
+        - name: Faz a execução do 'db2 connect to' BASE
+          become_user: "{{ usuario_banco }}"
+          loop: "{{ lista_bancos }}"
+          ansible.builtin.command:
+            cmd: echo 'db2 connect to {{ item }}'
+          register: db_connect_output
+          failed_when: db_connect_output.rc != 0
+
+        - name: Exibe o que seria executado para cada base
+          ansible.builtin.debug:
+            var: db_connect_output.results | map(attribute='stdout')
+...
